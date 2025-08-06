@@ -11,7 +11,6 @@ function setTheme(mode) {
 function toggleTheme() {
   const current = document.body.classList.contains('dark') ? 'dark' : 'light';
   setTheme(current === 'dark' ? 'light' : 'dark');
-  console.log("Testing");
 }
 
 window.addEventListener('DOMContentLoaded', () => {

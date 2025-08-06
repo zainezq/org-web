@@ -1,0 +1,58 @@
+:root {
+  --bg: #ffffff;
+  --fg: #000000;
+  --link: #1a0dab;
+  --heading: #004c99;
+  --code-bg: #f0f0f0;
+}
+
+body.dark {
+  --bg: #121212;
+  --fg: #e0e0e0;
+  --link: #8ab4f8;
+  --heading: #7baaf7;
+  --code-bg: #1e1e1e;
+}
+
+body {
+  font-family: sans-serif;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1rem;
+  line-height: 1.6;
+  background-color: var(--bg);
+  color: var(--fg);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+h1, h2, h3 {
+  color: var(--heading);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+pre, code {
+  background: var(--code-bg);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+/* Toggle button */
+#theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.4em 0.8em;
+  background: var(--code-bg);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
