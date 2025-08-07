@@ -95,3 +95,31 @@ pre.src {
     white-space: pre-wrap; /* wrap long lines */
     
 }
+
+
+.post-date {
+  color: pink;
+  font-size: 0.9em;
+  margin-left: 8px;
+}
+
+
+  .post-tag {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #444;
+    border-radius: 5px;
+    padding: 2px 6px;
+    margin-left: 6px;
+    font-size: 0.8em;
+    float: right;
+  }
+
+  li::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+li {
+  margin-bottom: 8px;
+}

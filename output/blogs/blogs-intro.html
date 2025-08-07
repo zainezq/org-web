@@ -3,9 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2025-08-07 Thu 22:36 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Zaine Qayyum</title>
+<title>Blogs Introduction</title>
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
   #content { max-width: 60em; margin: auto; }
@@ -193,8 +194,8 @@
 </style>
 
 <link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css" />
-<link rel="stylesheet" href="style.css" />
-<script src="script.js" defer></script>
+<link rel="stylesheet" href="../style.css" />
+<script src="../script.js" defer></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -204,127 +205,15 @@
   <a href="/blogs/blogs-list.html">Blogs | </a>
   <a href="/contact.html">Contact</a>
 </nav>
-<div id="updated">Updated: 2025-08-07 Thu 22:32</div>
+<div id="updated">Updated: 2025-08-07 Thu 22:24</div>
 </div>
 <div id="content" class="content">
-<h1 class="title">Zaine Qayyum</h1>
-<div id="outline-container-org3f485ab" class="outline-2">
-<h2 id="org3f485ab">Welcome! 🌱</h2>
-<div class="outline-text-2" id="text-org3f485ab">
+<h1 class="title">Blogs Introduction</h1>
+<div id="outline-container-org802326d" class="outline-2">
+<h2 id="org802326d">Introduction</h2>
+<div class="outline-text-2" id="text-org802326d">
 <p>
-This is a website built using Emacs Org-mode and published using <code>org-publish</code>.
-</p>
-
-<p>
-Feel free to explore:
-</p>
-
-<ul class="org-ul">
-<li><a href="about.html">About Page</a></li>
-<li><a href="posts/posts-list.html">Posts Page</a></li>
-<li><a href="blogs/blogs-list.html">Blogs Page</a></li>
-<li><a href="setup.html">Setup Page</a></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orga29d9d8" class="outline-2">
-<h2 id="orga29d9d8">How to publish web pages using <code>org-publish</code></h2>
-<div class="outline-text-2" id="text-orga29d9d8">
-<p>
-This website is heavily inspired by some people who have decided to use <code>org-publish</code> as a way to convert <code>org</code> files into <code>html</code>. I came across a few that took the plunge and decided to migrate from platforms like Wordpress and instead opted for a more transparent, text-based workflow.
-</p>
-
-<p>
-There is a <a href="https://en.wikipedia.org/wiki/Unix_philosophy">Unix philosophy</a> that emphasises building simple and compact code that can be easily maintainable, and following this approach (do one thing well) aligns with this philosophy.
-</p>
-
-<p>
-So how does one go about publishing web pages through Emacs's <code>org-publish</code>? The answer is quite simple. You probably will need to have some familiarity with <code>elisp</code> although it's not a must.
-</p>
-
-<p>
-The first thing we will want to do is edit our <code>init.el</code> file, which is the <b>initialization</b> file. In this file we want to add the following:
-</p>
-
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">
-(<span class="org-keyword">setq</span> org-publish-project-alist
-    '((<span class="org-string">"org-notes"</span>
-       <span class="org-builtin">:base-directory</span> <span class="org-string">"~/web"</span>
-       <span class="org-builtin">:base-extension</span> <span class="org-string">"org"</span>
-       <span class="org-builtin">:publishing-directory</span> <span class="org-string">"~/web"</span>
-       <span class="org-builtin">:recursive</span> t
-       <span class="org-builtin">:publishing-function</span> org-html-publish-to-html
-       <span class="org-builtin">:with-author</span> nil
-       <span class="org-builtin">:with-creator</span> nil
-       <span class="org-builtin">:html-validation-link</span> nil
-       <span class="org-builtin">:with-toc</span> t
-       <span class="org-builtin">:section-numbers</span> t
-       <span class="org-builtin">:html-head</span> <span class="org-string">"&lt;link rel=\"stylesheet\" href=\"style.css\" /&gt;"</span>
-       )
-      (<span class="org-string">"org-static"</span>
-       <span class="org-builtin">:base-directory</span> <span class="org-string">"~/web"</span>
-       <span class="org-builtin">:base-extension</span> <span class="org-string">"css</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">js</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">png</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">jpg</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">gif"</span>
-       <span class="org-builtin">:publishing-directory</span> <span class="org-string">"~/web/output"</span>
-       <span class="org-builtin">:recursive</span> t
-       <span class="org-builtin">:publishing-function</span> org-publish-attachment)
-      (<span class="org-string">"website"</span> <span class="org-builtin">:components</span> (<span class="org-string">"org-notes"</span> <span class="org-string">"org-static"</span>))))
-
-</pre>
-</div>
-
-<p>
-What this snippet of code is doing is it is telling <code>org-publish</code> what <b><b>configurations</b></b> we want to use when we end up running the publish command. Under <code>~/web</code> is where we want to include our files. Let us take a simple example and create an <code>index.org</code> file:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">
-#+TITLE: Website Name
-#+OPTIONS: toc:nil num:nil
-#+HTML_HEAD: &lt;link rel=<span class="org-string">"stylesheet"</span> href=<span class="org-string">"style.css"</span>&gt;
-
-* Welcome!
-
-This is a simple website
-
-</pre>
-</div>
-
-<p>
-There are some metadata at the very top as we can see, these help us customise each page the way we want to. Here I disabled the Table of Contents and section numbers just for this file. We can also create a simple <code>styles.css</code> file in the same directory.
-After doing this, we can run the command:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">
-M-x org-publish RET website
-
-</pre>
-</div>
-
-<p>
-This will generate a html file inside the <code>~/web/output/</code> directory, and we can serve this file using any static site generation tools; I recommend python due to it's simplicity:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-bash">
-<span class="org-builtin">cd</span> ~/web/output
-python3 -m http.server 8000 
-
-</pre>
-</div>
-
-<p>
-And there we go! The files are now being hosted on <code>http://localhost:8000/</code> and we have a fully functioning workflow for converting org files into a static website.
-</p>
-</div>
-</div>
-<div id="outline-container-orgf1acb9e" class="outline-2">
-<h2 id="orgf1acb9e">Contact</h2>
-<div class="outline-text-2" id="text-orgf1acb9e">
-<p>
-Feel free to reach out on GitHub: <a href="https://github.com/zainezq">https://github.com/zainezq</a>
+In this section you will find posts that are not as <i>structured</i> as the ones found in <a href="../posts/posts-list.html">here</a>. Mainly these will deal with findings, research, assorted writings and random bits and blobs.
 </p>
 </div>
 </div>
