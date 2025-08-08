@@ -6,7 +6,7 @@
 <!-- 2025-08-08 Fri 21:06 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Blogs List</title>
+<title>Wacom With Arch</title>
 <meta name="generator" content="Org Mode" />
 
 <link rel="stylesheet" href="https://gongzhitaao.org/orgcss/org.css" /> <link rel="stylesheet" href="/assets/style.css" /> <script src="/assets/script.js" defer></script> 
@@ -26,19 +26,29 @@
   <div id="updated">Updated: 2025-08-08 Fri 21:06</div>
 </div>
 <div id="content" class="content">
-<h1 class="title">Blogs List</h1>
+<div id="outline-container-orgd306bd1" class="outline-2">
+<h2 id="orgd306bd1">Wacom With Arch</h2>
+<div class="outline-text-2" id="text-orgd306bd1">
 <p>
-See the categories: <a href="../categories.html">Categories</a>
+I purchased a  <a href="https://www.wacom.com/en-gb/products/one-by-wacom">One by Wacom</a> tablet almost 2 years ago now and it works flawlessly in both Windows and MacOS and even in most Linux distros with some configuration.
 </p>
-<div id="outline-container-org0557295" class="outline-2">
-<h2 id="org0557295">Blogs:</h2>
-<div class="outline-text-2" id="text-org0557295">
-<ul class="org-ul">
-<li><a href="2025/08/wacom-with-arch.html">Wacom With Arch</a> <span class="post-date">2025-08-08</span> <span class="post-tag">insights</span></li>
-<li><a href="2025/08/what-do-i-want-to-do-with-emacs.html">What Do I Want To Do With Emacs</a> <span class="post-date">2025-08-08</span> <span class="post-tag">emacs</span> <span class="post-tag">review</span></li>
-<li><a href="2025/08/zettelkasten.html">Zettelkasten Method</a> <span class="post-date">2025-08-07</span> <span class="post-tag">education</span></li>
-<li><a href="blogs-intro.html">Blogs Introduction</a> <span class="post-date">2025-08-06</span> <span class="post-tag">introduction</span></li>
-</ul>
+
+<p>
+However with Arch and Hyprland, there were some issues related to the <code>xserver</code> it was running on. The X input driver module (e.g. xf86-input-wacom) is linked into the X server which in turn is in charge of rendering and generic input events. Hyprland on the other hand uses the Wayland display server protocol (replacement for the X protocol) hence why there is difficulty in input mapping.
+</p>
+
+<p>
+I came across this issue as I was able to get the tablet to work across multiple monitors (mapping to a single one) through the <code>xsetwacom</code> function - which, at the time I was using Ubuntu. But with Hyprland there needs to be some manual intervention. I came across this <a href="https://thomaspurnell.com/003_wacom_graphics_hyprland/wacom_hyprland.html">post</a> which explains nicely how to map the tablet to a single monitor. I took this approach with a slight configuration; in my <code>hyprland.conf</code> file, I simply added the following line:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-nil">exec-once = hyprctl keyword "device[wacom-one-by-wacom-m-pen]:output" "DP-1"
+</pre>
+</div>
+
+<p>
+which mapped the device to the primary monitor DP-1.
+</p>
 </div>
 </div>
 </div>
