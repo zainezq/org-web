@@ -47,23 +47,51 @@ a:hover {
   color: var(--code-bg);
 }
 
-/* Nav styling */
-nav {
+.banner-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap; /* allow items to wrap on small screens */
+  background-color: var(--banner-bg, #fff);
+  padding: 0.5rem 1rem;
   border-radius: 6px;
-  margin-bottom: 1rem;
+}
+
+.banner-logo {
+  height: 80px;
+  width: auto;
+  margin-right: 1.5rem;
+  border-radius: 50%;
+}
+
+/* Keep nav horizontal on desktop */
+nav {
+  display: flex;
+  gap: 1rem;
   font-weight: 600;
   font-size: 1.1rem;
 }
 
-nav a {
-  color: var(--link);
-  text-decoration: none;
-  font-weight: 600;
+/* Mobile styles */
+@media (max-width: 600px) {
+  .banner-header {
+    flex-direction: column; /* stack logo + nav */
+    align-items: center;
+    text-align: center;
+  }
+
+  .banner-logo {
+    margin: 0 0 0.5rem 0; /* space under logo */
+  }
+
+  nav {
+    flex-wrap: wrap; /* allow nav links to wrap */
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1rem; /* slightly smaller text */
+  }
 }
 
-nav a:hover {
-  text-decoration: underline;
-}
 
 /* Footer styling */
 footer {
@@ -123,3 +151,6 @@ pre.src {
 li {
   margin-bottom: 8px;
 }
+
+
+

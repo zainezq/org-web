@@ -3,214 +3,33 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2025-08-08 Fri 18:26 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Setup</title>
 <meta name="generator" content="Org Mode" />
-<style type="text/css">
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
 
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { }
-</style>
-
-<link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css" />
-<link rel="stylesheet" href="style.css" />
-<script src="script.js" defer></script>
+<link rel="stylesheet" href="https://gongzhitaao.org/orgcss/org.css" /> <link rel="stylesheet" href="/assets/style.css" /> <script src="/assets/script.js" defer></script> 
 </head>
 <body>
 <div id="preamble" class="status">
-<nav>
-  <a href="/">Home | </a>
-  <a href="/posts/posts-list.html">Posts | </a>
-  <a href="/blogs/blogs-list.html">Blogs | </a>
-  <a href="/contact.html">Contact</a>
-</nav>
-<div id="updated">Updated: 2025-08-07 Thu 22:36</div>
+
+<div class="banner-header">
+  <a href="/"> <img src="/assets/gr.png" alt="Site Logo" class="banner-logo" /> </a>
+  <nav>
+    <a href="/">Home | </a>
+    <a href="/posts/posts-list.html">Posts | </a>
+    <a href="/blogs/blogs-list.html">Blogs | </a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+  </div>
+  <div id="updated">Updated: 2025-08-08 Fri 18:26</div>
 </div>
 <div id="content" class="content">
 <h1 class="title">Setup</h1>
-<div id="outline-container-org829abdc" class="outline-2">
-<h2 id="org829abdc">Introduction</h2>
-<div class="outline-text-2" id="text-org829abdc">
+<div id="outline-container-orga729cc8" class="outline-2">
+<h2 id="orga729cc8">Introduction</h2>
+<div class="outline-text-2" id="text-orga729cc8">
 <p>
 This page will highlight the <code>build-script.el</code> used to generate this website. This entire website is generated through org files using the command:
 </p>
@@ -221,44 +40,35 @@ This page will highlight the <code>build-script.el</code> used to generate this 
 </div>
 </div>
 </div>
-<div id="outline-container-orgb9cb047" class="outline-2">
-<h2 id="orgb9cb047">The script</h2>
-<div class="outline-text-2" id="text-orgb9cb047">
+<div id="outline-container-org6bbc685" class="outline-2">
+<h2 id="org6bbc685">The script</h2>
+<div class="outline-text-2" id="text-org6bbc685">
 <p>
-The script is as follows, at the start I have commented out pieces of code (somewhat relevant to the script but never really used), followed by package management. Then there's the declaration of variables and functions and finally the <code>org-publish-project-alist</code> which handles nearly all of the project generation instructions.
+The script is as follows, at the start I have some metadata relating to the file, followed by package management,then the declaration of variables/functions and finally the <code>org-publish-project-alist</code> which handles nearly all of the project generation instructions.
 </p>
 
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">
-<span class="org-comment-delimiter">;; </span><span class="org-comment">Commented out things:
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">build-site.el --- Publish my website using org-publish -*- lexical-binding: t; -*-
 </span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">(defvar z-head
-</span><span class="org-comment-delimiter">;;   </span><span class="org-comment">"&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"https://gongzhitaao.org/orgcss/org.css\" /&gt;
-</span><span class="org-comment-delimiter">;; </span><span class="org-comment">&lt;link rel=\"stylesheet\" href=\"/style.css\" /&gt;")
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Author: Zaine Qayyum <a href="mailto:zaineulabideen%40outlook.com">&lt;zaineulabideen@outlook.com&gt;</a>
+</span><span class="org-comment-delimiter">;; </span><span class="org-comment">Created: 2025-08-08
+</span><span class="org-comment-delimiter">;; </span><span class="org-comment">Purpose: Build and publish my static site from Org files.
 </span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">(setq org-html-validation-link nil
-</span><span class="org-comment-delimiter">;;       </span><span class="org-comment">org-html-head-include-scripts nil
-</span><span class="org-comment-delimiter">;;       </span><span class="org-comment">org-html-head-include-default-style nil
-</span><span class="org-comment-delimiter">;;       </span><span class="org-comment">org-html-head z-head)
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Commentary:
+</span><span class="org-comment-delimiter">;; </span><span class="org-comment">Run this file with:
+</span><span class="org-comment-delimiter">;; </span><span class="org-comment">emacs -Q --script build-site.el
 </span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">(type-of (car '(rose violet daisy buttercup)))
-</span><span class="org-comment-delimiter">;; </span><span class="org-comment">(cadr (assoc "FILETAGS" (org-collect-keywords '("FILETAGS"))))
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Code:
 </span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">(let ((list '(("post1.org") ("post2.org"))))
-</span><span class="org-comment-delimiter">;;   </span><span class="org-comment">(mapconcat (lambda (entry)
-</span><span class="org-comment-delimiter">;;                </span><span class="org-comment">(format "- [[file:%s]]" (car entry)))
-</span><span class="org-comment-delimiter">;;              </span><span class="org-comment">list
-</span><span class="org-comment-delimiter">;;              </span><span class="org-comment">"\n"))
-</span>
-
-
-<span class="org-comment-delimiter">;;</span><span class="org-comment">BEGIN:
-</span><span class="org-comment-delimiter">;; </span><span class="org-comment">Set the package installation directory so that packages aren't stored in the
-</span><span class="org-comment-delimiter">;; </span><span class="org-comment">~/.emacs.d/elpa path.
-</span>(<span class="org-keyword">require</span> '<span class="org-constant">package</span>)
+(<span class="org-keyword">require</span> '<span class="org-constant">package</span>)
 (<span class="org-keyword">setq</span> package-user-dir (expand-file-name <span class="org-string">"./.packages"</span>))
 (<span class="org-keyword">setq</span> package-archives '((<span class="org-string">"melpa"</span> . <span class="org-string">"https://melpa.org/packages/"</span>)
                          (<span class="org-string">"elpa"</span> . <span class="org-string">"https://elpa.gnu.org/packages/"</span>)))
+
+(<span class="org-keyword">require</span> '<span class="org-constant">ox-publish</span>)
+(<span class="org-keyword">require</span> '<span class="org-constant">cl-lib</span>)
+(<span class="org-keyword">require</span> '<span class="org-constant">org</span>)
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">Initialize the package system
 </span>(package-initialize)
@@ -269,17 +79,25 @@ The script is as follows, at the start I have commented out pieces of code (some
 </span>(package-install 'htmlize)
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">Load the publishing system
-</span>(<span class="org-keyword">require</span> '<span class="org-constant">ox-publish</span>)
-(<span class="org-keyword">setq</span> org-html-htmlize-output-type 'css)
+</span>(<span class="org-keyword">setq</span> org-html-htmlize-output-type 'css)
+(<span class="org-keyword">setq</span> org-html-head-include-default-style nil)
+
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">z-shared-head</span>
+      <span class="org-string">"
+&lt;link rel=\"stylesheet\" href=\"https://gongzhitaao.org/orgcss/org.css\" /&gt; &lt;link rel=\"stylesheet\" href=\"/assets/style.css\" /&gt; &lt;script src=\"/assets/script.js\" defer&gt;&lt;/script&gt; "</span>)
 
 (<span class="org-keyword">defvar</span> <span class="org-variable-name">z-preamble</span>
-  <span class="org-string">"&lt;nav&gt;
-  &lt;a href=\"/\"&gt;Home | &lt;/a&gt;
-  &lt;a href=\"/posts/posts-list.html\"&gt;Posts | &lt;/a&gt;
-  &lt;a href=\"/blogs/blogs-list.html\"&gt;Blogs | &lt;/a&gt;
-  &lt;a href=\"/contact.html\"&gt;Contact&lt;/a&gt;
-&lt;/nav&gt;
-&lt;div id=\"updated\"&gt;Updated: %C&lt;/div&gt;"</span>
+  <span class="org-string">"
+&lt;div class=\"banner-header\"&gt;
+  &lt;a href=\"/\"&gt; &lt;img src=\"/assets/gr.png\" alt=\"Site Logo\" class=\"banner-logo\" /&gt; &lt;/a&gt;
+  &lt;nav&gt;
+    &lt;a href=\"/\"&gt;Home | &lt;/a&gt;
+    &lt;a href=\"/posts/posts-list.html\"&gt;Posts | &lt;/a&gt;
+    &lt;a href=\"/blogs/blogs-list.html\"&gt;Blogs | &lt;/a&gt;
+    &lt;a href=\"/contact.html\"&gt;Contact&lt;/a&gt;
+  &lt;/nav&gt;
+  &lt;/div&gt;
+  &lt;div id=\"updated\"&gt;Updated: %C&lt;/div&gt;"</span>
 )
 
 (<span class="org-keyword">defvar</span> <span class="org-variable-name">z-postamble</span>
@@ -299,6 +117,7 @@ Created with %c on &lt;a href=\"https://www.archlinux.org/\"&gt;Arch&lt;/a&gt; &
   (concat
    <span class="org-string">"#+TITLE: "</span> title <span class="org-string">"\n"</span>
    <span class="org-string">"#+OPTIONS: toc:nil num:nil \n\n"</span>
+   <span class="org-string">"See the categories: @@html:&lt;a href=\"../categories.html\"&gt;Categories&lt;/a&gt;@@\n\n"</span>
    <span class="org-string">"* Posts:\n"</span>
    (mapconcat
     (<span class="org-keyword">lambda</span> (entry)
@@ -336,7 +155,8 @@ Created with %c on &lt;a href=\"https://www.archlinux.org/\"&gt;Arch&lt;/a&gt; &
   (concat
    <span class="org-string">"#+TITLE: "</span> title <span class="org-string">"\n"</span>
    <span class="org-string">"#+OPTIONS: toc:nil num:nil \n\n"</span>
-   <span class="org-string">"* Posts:\n"</span>
+   <span class="org-string">"See the categories: @@html:&lt;a href=\"../categories.html\"&gt;Categories&lt;/a&gt;@@\n\n"</span>
+   <span class="org-string">"* Blogs:\n"</span>
    (mapconcat
     (<span class="org-keyword">lambda</span> (entry)
       (<span class="org-keyword">let*</span> ((link (car entry))
@@ -368,9 +188,120 @@ Created with %c on &lt;a href=\"https://www.archlinux.org/\"&gt;Arch&lt;/a&gt; &
     <span class="org-string">"\n"</span>)))
 
 
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">z/categories-sitemap</span> (title _list)
+  <span class="org-doc">"Generate a categories page by scanning tags across org-posts and org-blogs."</span>
+  (<span class="org-keyword">let*</span> ((expanded (org-publish-expand-projects org-publish-project-alist))
+         (posts    (assoc <span class="org-string">"org-posts"</span> expanded))
+         (blogs    (assoc <span class="org-string">"org-blogs"</span> expanded))
+         <span class="org-comment-delimiter">;; </span><span class="org-comment">DO NOT set :exclude to "" &#8212; it excludes everything
+</span>         (files (cl-remove-duplicates
+                 (append (<span class="org-keyword">and</span> posts (org-publish-get-base-files posts))
+                         (<span class="org-keyword">and</span> blogs (org-publish-get-base-files blogs)))
+                 <span class="org-builtin">:test</span> #'file-equal-p))
+         <span class="org-comment-delimiter">;; </span><span class="org-comment">optional: drop the generated sitemaps
+</span>         (files (cl-remove-if
+                 (<span class="org-keyword">lambda</span> (f)
+                   (member (file-name-nondirectory f)
+                           '(<span class="org-string">"posts-list.org"</span> <span class="org-string">"blogs-list.org"</span> <span class="org-string">"sitemap.org"</span> <span class="org-string">"categories.org"</span>)))
+                 files))
+         (counts (make-hash-table <span class="org-builtin">:test</span> 'equal)))
+    <span class="org-comment-delimiter">;;</span><span class="org-comment">(message "files I will scan: %S" files)
+</span>    (<span class="org-keyword">dolist</span> (f files)
+      (<span class="org-keyword">when</span> (file-readable-p f)
+        (<span class="org-keyword">with-temp-buffer</span>
+          (insert-file-contents f)
+          (org-mode)
+          (<span class="org-keyword">let*</span> ((kw (org-collect-keywords '(<span class="org-string">"FILETAGS"</span> <span class="org-string">"TAGS"</span>)))
+                 (raw (car (<span class="org-keyword">or</span> (cdr (assoc <span class="org-string">"FILETAGS"</span> kw))
+                               (cdr (assoc <span class="org-string">"TAGS"</span> kw))))))
+            (<span class="org-keyword">when</span> raw
+              (<span class="org-keyword">dolist</span> (tag (split-string raw <span class="org-string">":"</span> t))
+                (puthash tag (1+ (gethash tag counts 0)) counts)))))))
+
+    (<span class="org-keyword">let</span> (tags)
+      (maphash (<span class="org-keyword">lambda</span> (k _) (<span class="org-keyword">push</span> k tags)) counts)
+      (<span class="org-keyword">setq</span> tags (sort tags #'string-lessp))
+      (concat
+       <span class="org-string">"#+TITLE: "</span> title <span class="org-string">"\n#+OPTIONS: toc:nil num:nil title:nil\n\n* Categories (Includes both blogs and posts)\n"</span>
+       (<span class="org-keyword">if</span> tags
+           (mapconcat
+            (<span class="org-keyword">lambda</span> (tag)
+              (format <span class="org-string">"- [[file:tags/%s.org][@@html:&lt;span class=\"post-tag\"&gt;%s&lt;/span&gt;@@]] (%d)"</span>
+                      (z/tag-slug tag) tag (gethash tag counts))
+              )
+            tags
+            <span class="org-string">"\n"</span>)
+         <span class="org-string">"_No tags found yet._"</span>)))))
+
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">z/tag-slug</span> (s)
+  <span class="org-doc">"Turn a tag into a safe filename."</span>
+  (<span class="org-keyword">let</span> ((down (downcase s)))
+    (replace-regexp-in-string <span class="org-string">"[</span><span class="org-string"><span class="org-negation-char">^</span></span><span class="org-string">a-z0-9]+"</span> <span class="org-string">"-"</span> down)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">z/collect-post-files</span> ()
+  <span class="org-doc">"Return all .org files from org-posts and org-blogs."</span>
+  (<span class="org-keyword">let*</span> ((expanded (org-publish-expand-projects org-publish-project-alist))
+         (posts    (assoc <span class="org-string">"org-posts"</span> expanded))
+         (blogs    (assoc <span class="org-string">"org-blogs"</span> expanded)))
+    (cl-remove-duplicates
+     (append (<span class="org-keyword">and</span> posts (org-publish-get-base-files posts))
+             (<span class="org-keyword">and</span> blogs (org-publish-get-base-files blogs)))
+     <span class="org-builtin">:test</span> #'file-equal-p)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">z/gather-tag-index</span> ()
+  <span class="org-doc">"Return hash: tag -&gt; list of (FILE TITLE DATE-ISO)."</span>
+  (<span class="org-keyword">let</span> ((idx (make-hash-table <span class="org-builtin">:test</span> 'equal)))
+    (<span class="org-keyword">dolist</span> (f (z/collect-post-files))
+      (<span class="org-keyword">when</span> (<span class="org-keyword">and</span> (string-match-p <span class="org-string">"\\.org\\'"</span> f)
+                 (file-readable-p f)
+                 <span class="org-comment-delimiter">;; </span><span class="org-comment">ignore generated lists
+</span>                 (not (member (file-name-nondirectory f)
+                              '(<span class="org-string">"posts-list.org"</span> <span class="org-string">"blogs-list.org"</span> <span class="org-string">"sitemap.org"</span> <span class="org-string">"categories.org"</span>))))
+        (<span class="org-keyword">with-temp-buffer</span>
+          (insert-file-contents f)
+          (org-mode)
+          (<span class="org-keyword">let*</span> ((kw (org-collect-keywords '(<span class="org-string">"TITLE"</span> <span class="org-string">"FILETAGS"</span> <span class="org-string">"TAGS"</span> <span class="org-string">"DATE"</span>)))
+                 (title (<span class="org-keyword">or</span> (car (cdr (assoc <span class="org-string">"TITLE"</span> kw)))
+                            (file-name-base f)))
+                 (date  (<span class="org-keyword">or</span> (car (cdr (assoc <span class="org-string">"DATE"</span> kw))) <span class="org-string">""</span>)) <span class="org-comment-delimiter">;; </span><span class="org-comment">optional
+</span>                 (raw   (car (<span class="org-keyword">or</span> (cdr (assoc <span class="org-string">"FILETAGS"</span> kw))
+                                 (cdr (assoc <span class="org-string">"TAGS"</span> kw))))))
+            (<span class="org-keyword">when</span> raw
+              (<span class="org-keyword">dolist</span> (tag (split-string raw <span class="org-string">":"</span> t))
+                (<span class="org-keyword">push</span> (list f title date) (gethash tag idx))))))))
+    idx))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">z/write-tag-pages</span> ()
+  <span class="org-doc">"Generate tags/*.org pages listing posts for each tag."</span>
+  (<span class="org-keyword">let*</span> ((site-root (expand-file-name <span class="org-string">"~/master-folder/org_files/org_web/"</span>))
+         (tags-dir  (expand-file-name <span class="org-string">"tags"</span> site-root)))
+    (<span class="org-keyword">unless</span> (file-directory-p tags-dir)
+      (make-directory tags-dir t))
+    (<span class="org-keyword">let</span> ((idx (z/gather-tag-index)))
+      (maphash
+       (<span class="org-keyword">lambda</span> (tag items)
+         (<span class="org-keyword">let*</span> ((slug (z/tag-slug tag))
+                (outfile (expand-file-name (format <span class="org-string">"%s.org"</span> slug) tags-dir)))
+           (<span class="org-keyword">with-temp-file</span> outfile
+             (insert (format <span class="org-string">"#+TITLE: Tag: %s\n#+OPTIONS: toc:nil num:nil title:nil \n\n* Posts tagged %s\n"</span>
+                             tag tag))
+             <span class="org-comment-delimiter">;; </span><span class="org-comment">sort newest first if DATE present
+</span>             (<span class="org-keyword">setq</span> items (sort items (<span class="org-keyword">lambda</span> (a b) (string&gt; (nth 2 a) (nth 2 b)))))
+             (<span class="org-keyword">dolist</span> (it items)
+               (<span class="org-keyword">let*</span> ((file (nth 0 it))
+                      (title (nth 1 it))
+                      (rel   (file-relative-name file tags-dir)))
+                 <span class="org-comment-delimiter">;; </span><span class="org-comment">link to the source .org; org-publish will rewrite to the .html
+</span>                 (insert (format <span class="org-string">"- [[file:%s][%s]]\n"</span> rel title)))))))
+       idx)
+      )))
+
+
 <span class="org-comment-delimiter">;; </span><span class="org-comment">Define the publishing project
 </span>(<span class="org-keyword">setq</span> org-publish-project-alist
-      `((<span class="org-string">"org-notes"</span>
+      `((<span class="org-string">"org-main"</span>
          <span class="org-builtin">:recursive</span> t
          <span class="org-builtin">:base-directory</span> <span class="org-string">"~/master-folder/org_files/org_web/"</span>
          <span class="org-builtin">:publishing-function</span> org-html-publish-to-html
@@ -381,17 +312,27 @@ Created with %c on &lt;a href=\"https://www.archlinux.org/\"&gt;Arch&lt;/a&gt; &
          <span class="org-builtin">:base-extension</span> <span class="org-string">"org"</span>
          <span class="org-builtin">:section-numbers</span> nil
          <span class="org-builtin">:time-stamp-file</span> nil
+         <span class="org-builtin">:auto-sitemap</span> t
+         <span class="org-builtin">:sitemap-filename</span> <span class="org-string">"sitemap.org"</span>
+         <span class="org-builtin">:sitemap-title</span> <span class="org-string">"Sitemap"</span>
+         <span class="org-builtin">:sitemap-sort-files</span> chronologically
          <span class="org-builtin">:html-preamble</span> ,z-preamble
          <span class="org-builtin">:html-postamble</span> ,z-postamble
-         <span class="org-builtin">:html-head</span> <span class="org-string">"
-&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"https://gongzhitaao.org/orgcss/org.css\" /&gt;
-&lt;link rel=\"stylesheet\" href=\"style.css\" /&gt;
-&lt;script src=\"script.js\" defer&gt;&lt;/script&gt;
-"</span>
-        )
+         <span class="org-builtin">:html-head</span> ,z-shared-head)
+        (<span class="org-string">"org-categories-sitemap"</span>
+         <span class="org-builtin">:recursive</span> t
+         <span class="org-builtin">:base-directory</span> <span class="org-string">"~/master-folder/org_files/org_web/"</span>
+         <span class="org-builtin">:publishing-directory</span> <span class="org-string">"~/master-folder/org_files/org_web/output"</span>
+         <span class="org-builtin">:base-extension</span> <span class="org-string">"org"</span>
+         <span class="org-builtin">:auto-sitemap</span> t
+         <span class="org-builtin">:sitemap-filename</span> <span class="org-string">"categories.org"</span>
+         <span class="org-builtin">:sitemap-title</span> <span class="org-string">"Categories"</span>
+         <span class="org-builtin">:sitemap-function</span> z/categories-sitemap
+         <span class="org-builtin">:html-preamble</span> ,z-preamble
+         <span class="org-builtin">:html-postamble</span> ,z-postamble
+         <span class="org-builtin">:html-head</span> ,z-shared-head)
         (<span class="org-string">"org-posts"</span>
          <span class="org-builtin">:base-directory</span> <span class="org-string">"~/master-folder/org_files/org_web/posts"</span>
-         <span class="org-builtin">:base-extension</span> <span class="org-string">"org"</span>
          <span class="org-builtin">:publishing-directory</span> <span class="org-string">"~/master-folder/org_files/org_web/output/posts/"</span>
          <span class="org-builtin">:recursive</span> t
          <span class="org-builtin">:base-extension</span> <span class="org-string">"org"</span>
@@ -408,15 +349,9 @@ Created with %c on &lt;a href=\"https://www.archlinux.org/\"&gt;Arch&lt;/a&gt; &
          <span class="org-builtin">:sitemap-title</span> <span class="org-string">"Posts List"</span>
          <span class="org-builtin">:sitemap-style</span> list
          <span class="org-builtin">:sitemap-function</span> z/posts-sitemap
-         <span class="org-builtin">:html-head</span> <span class="org-string">"
-&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"https://gongzhitaao.org/orgcss/org.css\" /&gt;
-&lt;link rel=\"stylesheet\" href=\"../style.css\" /&gt;
-&lt;script src=\"../script.js\" defer&gt;&lt;/script&gt;
-"</span>
-         )
+         <span class="org-builtin">:html-head</span> ,z-shared-head)
         (<span class="org-string">"org-blogs"</span>
          <span class="org-builtin">:base-directory</span> <span class="org-string">"~/master-folder/org_files/org_web/blogs"</span>
-         <span class="org-builtin">:base-extension</span> <span class="org-string">"org"</span>
          <span class="org-builtin">:publishing-directory</span> <span class="org-string">"~/master-folder/org_files/org_web/output/blogs/"</span>
          <span class="org-builtin">:recursive</span> t
          <span class="org-builtin">:base-extension</span> <span class="org-string">"org"</span>
@@ -424,8 +359,6 @@ Created with %c on &lt;a href=\"https://www.archlinux.org/\"&gt;Arch&lt;/a&gt; &
          <span class="org-builtin">:with-author</span> nil
          <span class="org-builtin">:with-creator</span> nil
          <span class="org-builtin">:html-validation-link</span> nil
-         <span class="org-builtin">:with-toc</span> t
-         <span class="org-builtin">:section-numbers</span> t
          <span class="org-builtin">:html-preamble</span> ,z-preamble
          <span class="org-builtin">:html-postamble</span> ,z-postamble
          <span class="org-builtin">:auto-sitemap</span> t
@@ -433,46 +366,45 @@ Created with %c on &lt;a href=\"https://www.archlinux.org/\"&gt;Arch&lt;/a&gt; &
          <span class="org-builtin">:sitemap-title</span> <span class="org-string">"Blogs List"</span>
          <span class="org-builtin">:sitemap-style</span> list
          <span class="org-builtin">:sitemap-function</span> z/blogs-sitemap
-         <span class="org-builtin">:html-head</span> <span class="org-string">"
-&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"https://gongzhitaao.org/orgcss/org.css\" /&gt;
-&lt;link rel=\"stylesheet\" href=\"../style.css\" /&gt;
-&lt;script src=\"../script.js\" defer&gt;&lt;/script&gt;
-"</span>
-         )
-
-
+         <span class="org-builtin">:html-head</span> ,z-shared-head)
+        (<span class="org-string">"org-tags"</span>
+         <span class="org-builtin">:base-directory</span> <span class="org-string">"~/master-folder/org_files/org_web/tags"</span>
+         <span class="org-builtin">:publishing-directory</span> <span class="org-string">"~/master-folder/org_files/org_web/output/tags"</span>
+         <span class="org-builtin">:recursive</span> t
+         <span class="org-builtin">:base-extension</span> <span class="org-string">"org"</span>
+         <span class="org-builtin">:publishing-function</span> org-html-publish-to-html
+         <span class="org-builtin">:with-author</span> nil
+         <span class="org-builtin">:with-creator</span> nil
+         <span class="org-builtin">:html-preamble</span> ,z-preamble
+         <span class="org-builtin">:html-postamble</span> ,z-postamble
+         <span class="org-builtin">:html-head</span> ,z-shared-head)
         (<span class="org-string">"org-assets"</span>
          <span class="org-builtin">:base-directory</span> <span class="org-string">"~/master-folder/org_files/org_web/assets/"</span>
          <span class="org-builtin">:base-extension</span> <span class="org-string">"css</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">js</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">png</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">jpg</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">gif</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">svg</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">pdf</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">woff</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">woff2</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">ttf"</span>
          <span class="org-builtin">:publishing-directory</span> <span class="org-string">"~/master-folder/org_files/org_web/output/assets/"</span>
          <span class="org-builtin">:recursive</span> t
          <span class="org-builtin">:publishing-function</span> org-publish-attachment)
-        (<span class="org-string">"org-static"</span>
-         <span class="org-builtin">:base-directory</span> <span class="org-string">"~/master-folder/org_files/org_web/"</span>
-         <span class="org-builtin">:base-extension</span> <span class="org-string">"css</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">js"</span>
-         <span class="org-builtin">:publishing-directory</span> <span class="org-string">"~/master-folder/org_files/org_web/output"</span>
-         <span class="org-builtin">:recursive</span> t
-         <span class="org-builtin">:publishing-function</span> org-publish-attachment)
+        ))
 
-        (<span class="org-string">"website"</span>
-         <span class="org-builtin">:components</span> (<span class="org-string">"org-notes"</span> <span class="org-string">"org-assets"</span> <span class="org-string">"org-posts"</span> <span class="org-string">"org-blogs"</span> <span class="org-string">"org-static"</span>))))
-
-<span class="org-comment-delimiter">;; </span><span class="org-comment">Delete the output before generating the new one
-</span>(delete-directory <span class="org-string">"~/master-folder/org_files/org_web/output/"</span> t)
+(delete-directory <span class="org-string">"~/master-folder/org_files/org_web/output/"</span> t)
+(delete-directory <span class="org-string">"~/master-folder/org_files/org_web/tags/"</span> t)
 (message <span class="org-string">"Directory deleted"</span>)
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">Generate the site output
-</span>(org-publish-all t)
+</span>(z/write-tag-pages)
+(org-publish-all t)
 
 (message <span class="org-string">"Build complete!"</span>)
 
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">build-site.el ends here
+</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org9d45ee3" class="outline-2">
-<h2 id="org9d45ee3">Publish Script</h2>
-<div class="outline-text-2" id="text-org9d45ee3">
+<div id="outline-container-org36c15bb" class="outline-2">
+<h2 id="org36c15bb">Publish Script</h2>
+<div class="outline-text-2" id="text-org36c15bb">
 <p>
 As the project is hosted on Github, I have created a small script that is able to push changes to the remote repository, which Cloudflare will automatically detect and rebuild the website:
 </p>
