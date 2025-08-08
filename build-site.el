@@ -1,0 +1,234 @@
+;; Commented out things:
+
+;; (defvar z-head
+;;   "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://gongzhitaao.org/orgcss/org.css\" />
+;; <link rel=\"stylesheet\" href=\"/style.css\" />")
+
+;; (setq org-html-validation-link nil
+;;       org-html-head-include-scripts nil
+;;       org-html-head-include-default-style nil
+;;       org-html-head z-head)
+
+;; (type-of (car '(rose violet daisy buttercup)))
+;; (cadr (assoc "FILETAGS" (org-collect-keywords '("FILETAGS"))))
+
+;; (let ((list '(("post1.org") ("post2.org"))))
+;;   (mapconcat (lambda (entry)
+;;                (format "- [[file:%s]]" (car entry)))
+;;              list
+;;              "\n"))
+
+
+
+;;BEGIN:
+;; Set the package installation directory so that packages aren't stored in the
+;; ~/.emacs.d/elpa path.
+(require 'package)
+(setq package-user-dir (expand-file-name "./.packages"))
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
+
+;; Initialize the package system
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; Install dependencies
+(package-install 'htmlize)
+
+;; Load the publishing system
+(require 'ox-publish)
+(setq org-html-htmlize-output-type 'css)
+
+(defvar z-preamble
+  "<nav>
+  <a href=\"/\">Home | </a>
+  <a href=\"/posts/posts-list.html\">Posts | </a>
+  <a href=\"/blogs/blogs-list.html\">Blogs | </a>
+  <a href=\"/contact.html\">Contact</a>
+</nav>
+<div id=\"updated\">Updated: %C</div>"
+)
+
+(defvar z-postamble
+  "<footer>
+<div class=\"copyright-container\">
+<div class=\"copyright\">
+Copyright &copy; 2022-2025 Zaine Qayyum. All rights reserved unless otherwise noted.</div></div>
+<div class=\"generated\">
+Created with %c on <a href=\"https://www.archlinux.org/\">Arch</a> <a href=\"https://www.gnu.org\">GNU</a>/<a href=\"https://www.kernel.org/\">Linux</a>
+</div>
+</footer>")
+
+
+
+(defun z/posts-sitemap (title list)
+  "sitemap that lists post links as bullet points with dates and tags."
+  (concat
+   "#+TITLE: " title "\n"
+   "#+OPTIONS: toc:nil num:nil \n\n"
+   "* Posts:\n"
+   (mapconcat
+    (lambda (entry)
+      (let* ((link (car entry))
+             ;; extract relative file name from the link
+             (filename (if (string-match "\\[\\[file:\\([^]]+\\)\\]" link)
+                           (match-string 1 link)
+                         link))
+             (full-path (expand-file-name filename "~/master-folder/org_files/org_web/posts/"))
+             (date-str "no date")
+             (tags-str ""))
+        ;; Get publish date
+        (let ((date (org-publish-find-date full-path org-publish-project-alist)))
+          (when date
+            (setq date-str (format-time-string "%Y-%m-%d" date))))
+        ;; Get FILETAGS from file buffer
+        (when (file-exists-p full-path)
+          (with-temp-buffer
+            (insert-file-contents full-path)
+            (org-mode)
+            (let* ((tags (cadr (assoc "FILETAGS" (org-collect-keywords '("FILETAGS"))))))
+              (when tags
+                (setq tags-str (mapconcat (lambda (tag)
+                                            (format "@@html:<span class=\"post-tag\">%s</span>@@" tag))
+                                          (split-string tags ":" t)  ;; <- Splits by ":" and removes empty strings
+                                          " "))))))
+        ;; Final line output
+        (format "- %s @@html:<span class=\"post-date\">%s</span>@@ %s" link date-str tags-str)))
+    (cdr list)
+    "\n")))
+
+
+(defun z/blogs-sitemap (title list)
+  "sitemap that lists blog links as bullet points with dates and tags."
+  (concat
+   "#+TITLE: " title "\n"
+   "#+OPTIONS: toc:nil num:nil \n\n"
+   "* Posts:\n"
+   (mapconcat
+    (lambda (entry)
+      (let* ((link (car entry))
+             ;; extract relative file name from the link
+             (filename (if (string-match "\\[\\[file:\\([^]]+\\)\\]" link)
+                           (match-string 1 link)
+                         link))
+             (full-path (expand-file-name filename "~/master-folder/org_files/org_web/blogs/"))
+             (date-str "no date")
+             (tags-str ""))
+        ;; Get publish date
+        (let ((date (org-publish-find-date full-path org-publish-project-alist)))
+          (when date
+            (setq date-str (format-time-string "%Y-%m-%d" date))))
+        ;; Get FILETAGS from file buffer
+        (when (file-exists-p full-path)
+          (with-temp-buffer
+            (insert-file-contents full-path)
+            (org-mode)
+            (let* ((tags (cadr (assoc "FILETAGS" (org-collect-keywords '("FILETAGS"))))))
+              (when tags
+                (setq tags-str (mapconcat (lambda (tag)
+                                            (format "@@html:<span class=\"post-tag\">%s</span>@@" tag))
+                                          (split-string tags ":" t)  ;; <- Splits by ":" and removes empty strings
+                                          " "))))))
+        ;; Final line output
+        (format "- %s @@html:<span class=\"post-date\">%s</span>@@ %s" link date-str tags-str)))
+    (cdr list)
+    "\n")))
+
+
+;; Define the publishing project
+(setq org-publish-project-alist
+      `(("org-notes"
+         :recursive t
+         :base-directory "~/master-folder/org_files/org_web/"
+         :publishing-function org-html-publish-to-html
+         :publishing-directory "~/master-folder/org_files/org_web/output"
+         :with-author nil
+         :with-creator t
+         :with-toc t
+         :base-extension "org"
+         :section-numbers nil
+         :time-stamp-file nil
+         :html-preamble ,z-preamble
+         :html-postamble ,z-postamble
+	 :html-head "
+<link rel=\"stylesheet\" type=\"text/css\" href=\"https://gongzhitaao.org/orgcss/org.css\" />
+<link rel=\"stylesheet\" href=\"style.css\" />
+<script src=\"script.js\" defer></script>
+"
+	)
+        ("org-posts"
+         :base-directory "~/master-folder/org_files/org_web/posts"
+         :base-extension "org"
+         :publishing-directory "~/master-folder/org_files/org_web/output/posts/"
+         :recursive t
+         :base-extension "org"
+         :publishing-function org-html-publish-to-html
+         :with-author nil
+         :with-creator nil
+         :html-validation-link nil
+         :with-toc t
+         :section-numbers t
+         :html-preamble ,z-preamble
+         :html-postamble ,z-postamble
+	 :auto-sitemap t
+	 :sitemap-filename "posts-list.org"
+	 :sitemap-title "Posts List"
+	 :sitemap-style list
+	 :sitemap-function z/posts-sitemap
+	 :html-head "
+<link rel=\"stylesheet\" type=\"text/css\" href=\"https://gongzhitaao.org/orgcss/org.css\" />
+<link rel=\"stylesheet\" href=\"../style.css\" />
+<script src=\"../script.js\" defer></script>
+"
+	 )
+        ("org-blogs"
+         :base-directory "~/master-folder/org_files/org_web/blogs"
+         :base-extension "org"
+         :publishing-directory "~/master-folder/org_files/org_web/output/blogs/"
+         :recursive t
+         :base-extension "org"
+         :publishing-function org-html-publish-to-html
+         :with-author nil
+         :with-creator nil
+         :html-validation-link nil
+         :with-toc t
+         :section-numbers t
+         :html-preamble ,z-preamble
+         :html-postamble ,z-postamble
+	 :auto-sitemap t
+	 :sitemap-filename "blogs-list.org"
+	 :sitemap-title "Blogs List"
+	 :sitemap-style list
+	 :sitemap-function z/blogs-sitemap
+	 :html-head "
+<link rel=\"stylesheet\" type=\"text/css\" href=\"https://gongzhitaao.org/orgcss/org.css\" />
+<link rel=\"stylesheet\" href=\"../style.css\" />
+<script src=\"../script.js\" defer></script>
+"
+	 )
+
+
+        ("org-assets"
+         :base-directory "~/master-folder/org_files/org_web/assets/"
+         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|svg\\|pdf\\|woff\\|woff2\\|ttf"
+         :publishing-directory "~/master-folder/org_files/org_web/output/assets/"
+         :recursive t
+         :publishing-function org-publish-attachment)
+        ("org-static"
+         :base-directory "~/master-folder/org_files/org_web/"
+         :base-extension "css\\|js"
+         :publishing-directory "~/master-folder/org_files/org_web/output"
+         :recursive t
+         :publishing-function org-publish-attachment)
+
+        ("website"
+         :components ("org-notes" "org-assets" "org-posts" "org-blogs" "org-static"))))
+
+(delete-directory "~/master-folder/org_files/org_web/output/" t)
+(message "Directory deleted")
+
+;; Generate the site output
+(org-publish-all t)
+
+(message "Build complete!")

@@ -1,0 +1,16 @@
+#+TITLE: Contact
+#+OPTIONS: toc:nil num:nil
+
+* Contact Using the Following:
+
+> LinkedIn: *[[https://www.linkedin.com/in/zaine-ul-abideen-qayyum-801a53247/][LinkedIn]]*
+
+> GitHub: *[[https://github.com/zainezq][Github]]*
+
+> Email:
+
+- *zaineulabideen (at) outlook (dot) com*
+
+- [[mailto:zaineulabideen@outlook.com][zaineulabideen@outlook.com]]
+
+Thanks for visiting!

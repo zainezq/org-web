@@ -1,0 +1,15 @@
+#+TITLE: Posts
+#+OPTIONS: toc:nil num:nil
+#+HTML_HEAD: <script src="script.js" defer></script>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/>
+#+HTML_HEAD: <link rel="stylesheet" href="style.css">
+#+SELECT_TAGS: export
+
+* Links 
+*** [[file:posts/posts-intro.org][Posts Introduction]]                                            :intro:
+
+
+*** [[file:posts/zettelkasten.org][Zettelkasten Method]]                                         :education:
+
+
+<2025-08-06 Wed>

@@ -1,0 +1,6 @@
+#+TITLE: Blogs List
+#+OPTIONS: toc:nil num:nil 
+
+* Posts:
+- [[file:blogs-intro.org][Blogs Introduction]] @@html:<span class="post-date">2025-08-08</span>@@ @@html:<span class="post-tag">introduction</span>@@
+- [[file:zettelkasten.org][Zettelkasten Method]] @@html:<span class="post-date">2025-08-05</span>@@ @@html:<span class="post-tag">education</span>@@

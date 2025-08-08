@@ -1,0 +1,8 @@
+#+TITLE: Blogs Introduction
+#+OPTIONS: toc:nil num:nil
+#+DATE: <2025-08-08 Fri>
+#+FILETAGS: :introduction:
+
+* Introduction
+
+In this section you will find posts that are not as /structured/ as the ones found in [[../posts/posts-list.org][here]]. Mainly these will deal with findings, research, assorted writings and random bits and blobs.

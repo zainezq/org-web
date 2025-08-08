@@ -1,0 +1,27 @@
+#+TITLE: Posts Introduction
+#+OPTIONS: toc:nil num:nil
+#+DATE: <2025-08-06 Wed>
+#+FILETAGS: :introduction:
+
+* Introduction
+
+In this section you will find posts related to both technical and non-technical topics. As Einstein said: “If you can’t explain it simply you don’t understand it well enough”, thus the goal with these ~posts~ is to develop the skill of being able to deliver habitual high quality explanations as well as reinforcing the topic(s) learnt.
+
+Generally, for teachers, this is done by taking the time to develop their own capacity to explain key concepts simply. In some institutions, departmental CPD is well spent rehearsing ways to improve the ability to explain the more difficult material in a more simpler way.
+
+When we study a topic, we get a grasp of the thing we are trying to learn, and then later on one may realise that they didn't /actually/ learn it. The context of this differs for every person, for some it may be in the field of medicine, others in the field of software development; we may find ourselves with a solution without knowing the /why/.
+
+Explaining topics is a fantastic method of learning, an [[https://hamatti.org/posts/explaining-it-helps-you-learn-it/][article]] written by Juha-Matti Santala titled *Explaining it helps you learn it* says:
+
+#+BEGIN_QUOTE
+The act of teaching (and more accurately, the act of preparing to teach) forces us to discover the knowledge gaps, fill them and improve our communication skills to a level where we know enough to confidently, comfortably and successfully transfer that knowledge from our mind to another mind. 
+#+END_QUOTE
+
+The article further quotes Henrik Jernevad in whose [[https://henko.net/blog/if-you-cant-explain-it-you-dont-understand-it/][blog post]] writes:
+
+#+BEGIN_QUOTE
+I think the magic comes when you need to put words to things. It is quite easy to have a vague picture of something in your mind without realizing how vague it actually is. Putting things in words exposes that vagueness. 
+#+END_QUOTE
+
+The final line /Putting things in words exposes that vagueness/ is profound in the context of learning. In the pursuit of any academic discipline, we're often confronted with vagueness. Yet, it’s often through explaining a concept to someone else, using your own words, analogies, and diagrams, that one ends up /actually/ understanding it.
+

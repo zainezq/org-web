@@ -1,1 +1,88 @@
-* Testing
+#+TITLE: Zaine Qayyum
+#+OPTIONS: toc:nil num:nil
+
+* Welcome! 🌱
+
+This is a website built using Emacs Org-mode and published using ~org-publish~.
+
+Feel free to explore:
+
+- [[file:about.org][About Page]]
+- [[file:posts/posts-list.org][Posts Page]]
+- [[file:blogs/blogs-list.org][Blogs Page]]
+- [[file:setup.org][Setup Page]]
+  
+* How to publish web pages using ~org-publish~
+
+This website is heavily inspired by some people who have decided to use ~org-publish~ as a way to convert ~org~ files into ~html~. I came across a few that took the plunge and decided to migrate from platforms like Wordpress and instead opted for a more transparent, text-based workflow.
+
+There is a [[https://en.wikipedia.org/wiki/Unix_philosophy][Unix philosophy]] that emphasises building simple and compact code that can be easily maintainable, and following this approach (do one thing well) aligns with this philosophy.
+
+So how does one go about publishing web pages through Emacs's ~org-publish~? The answer is quite simple. You probably will need to have some familiarity with ~elisp~ although it's not a must.
+
+The first thing we will want to do is edit our ~init.el~ file, which is the *initialization* file. In this file we want to add the following:
+
+
+#+begin_src emacs-lisp
+
+  (setq org-publish-project-alist
+      '(("org-notes"
+         :base-directory "~/web"
+         :base-extension "org"
+         :publishing-directory "~/web"
+         :recursive t
+         :publishing-function org-html-publish-to-html
+         :with-author nil
+         :with-creator nil
+         :html-validation-link nil
+         :with-toc t
+         :section-numbers t
+         :html-head "<link rel=\"stylesheet\" href=\"style.css\" />"
+         )
+        ("org-static"
+         :base-directory "~/web"
+         :base-extension "css\\|js\\|png\\|jpg\\|gif"
+         :publishing-directory "~/web/output"
+         :recursive t
+         :publishing-function org-publish-attachment)
+        ("website" :components ("org-notes" "org-static"))))
+
+#+end_src
+
+What this snippet of code is doing is it is telling ~org-publish~ what **configurations** we want to use when we end up running the publish command. Under ~~/web~ is where we want to include our files. Let us take a simple example and create an ~index.org~ file:
+
+#+begin_src emacs-lisp
+  
+  ,#+TITLE: Website Name
+  ,#+OPTIONS: toc:nil num:nil
+  ,#+HTML_HEAD: <link rel="stylesheet" href="style.css">
+
+  ,* Welcome!
+
+  This is a simple website
+
+#+end_src
+
+There are some metadata at the very top as we can see, these help us customise each page the way we want to. Here I disabled the Table of Contents and section numbers just for this file. We can also create a simple ~styles.css~ file in the same directory.
+After doing this, we can run the command:
+
+#+begin_src emacs-lisp
+  
+  M-x org-publish RET website
+
+#+end_src
+
+This will generate a html file inside the ~~/web/output/~ directory, and we can serve this file using any static site generation tools; I recommend python due to it's simplicity:
+
+#+begin_src bash
+
+  cd ~/web/output
+  python3 -m http.server 8000 
+
+#+end_src
+
+And there we go! The files are now being hosted on ~http://localhost:8000/~ and we have a fully functioning workflow for converting org files into a static website.
+
+* Contact
+
+Feel free to reach out on GitHub: https://github.com/zainezq
