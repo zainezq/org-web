@@ -1,5 +1,7 @@
 #+TITLE: Posts List
 #+OPTIONS: toc:nil num:nil 
 
+See the categories: @@html:<a href="../categories.html">Categories</a>@@
+
 * Posts:
-- [[file:posts-intro.org][Posts Introduction]] @@html:<span class="post-date">2025-08-06</span>@@ @@html:<span class="post-tag">introduction</span>@@
+- [[file:posts-intro.org][Posts Introduction]] @@html:<span class="post-date">2025-08-06</span>@@ @@html:<a href="/tags/introduction.html"> <span class="post-tag">introduction</span> </a>@@

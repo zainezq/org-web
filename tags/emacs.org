@@ -1,0 +1,6 @@
+#+TITLE: Tag: emacs
+#+OPTIONS: toc:nil num:nil title:nil 
+
+* Posts tagged emacs
+- [[file:../blogs/2025/08/spending-the-whole-day-on-this-website.org][09-08-2025: Website Changes]]
+- [[file:../blogs/2025/08/what-do-i-want-to-do-with-emacs.org][What Do I Want To Do With Emacs]]

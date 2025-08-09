@@ -1,8 +1,5 @@
 #+TITLE: Posts
 #+OPTIONS: toc:nil num:nil
-#+HTML_HEAD: <script src="script.js" defer></script>
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/>
-#+HTML_HEAD: <link rel="stylesheet" href="style.css">
 #+SELECT_TAGS: export
 
 * Links 

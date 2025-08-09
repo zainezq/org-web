@@ -1,32 +1,25 @@
-;; Commented out things:
+;;; build-site.el --- Publish my website using org-publish -*- lexical-binding: t; -*-
 
-;; (defvar z-head
-;;   "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://gongzhitaao.org/orgcss/org.css\" />
-;; <link rel=\"stylesheet\" href=\"/style.css\" />")
+;; Author: Zaine Qayyum <zaineulabideen@outlook.com>
+;; Created: 2025-08-08
+;; Purpose: Build and publish my static site from Org files.
 
-;; (setq org-html-validation-link nil
-;;       org-html-head-include-scripts nil
-;;       org-html-head-include-default-style nil
-;;       org-html-head z-head)
+;;; Commentary:
+;; Run this file with:
+;; emacs -Q --script build-site.el
 
-;; (type-of (car '(rose violet daisy buttercup)))
-;; (cadr (assoc "FILETAGS" (org-collect-keywords '("FILETAGS"))))
+;;; Code:
 
-;; (let ((list '(("post1.org") ("post2.org"))))
-;;   (mapconcat (lambda (entry)
-;;                (format "- [[file:%s]]" (car entry)))
-;;              list
-;;              "\n"))
-
-
-
-;;BEGIN:
-;; Set the package installation directory so that packages aren't stored in the
-;; ~/.emacs.d/elpa path.
 (require 'package)
 (setq package-user-dir (expand-file-name "./.packages"))
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
+
+(require 'ox-publish)
+(require 'cl-lib)
+(require 'org)
+(require 'ox)
+(require 'ox-html)
 
 ;; Initialize the package system
 (package-initialize)
@@ -35,19 +28,47 @@
 
 ;; Install dependencies
 (package-install 'htmlize)
+(add-to-list 'load-path "~/master-folder/org_files/org_web/")
+(require 'htmlize)
 
-;; Load the publishing system
-(require 'ox-publish)
 (setq org-html-htmlize-output-type 'css)
 
+
+(defvar z-shared-head
+      "
+<link rel=\"stylesheet\" href=\"/assets/styles/style.css\" />
+<script src=\"/assets/scripts/script.js\" defer></script> ")
+
+(setq org-export-global-macros
+      (append
+       '(("sidenote"
+          . "@@html:<label for=\"sn$1\" class=\"margin-toggle sidenote-number\"></label><input type=\"checkbox\" id=\"sn$1\" class=\"margin-toggle\"/><span class=\"sidenote\">$2</span>@@")
+	 ("epigraph"  . "@@html:<div class=\"epigraph\"><blockquote>$1<footer>$2</footer></blockquote></div>@@")
+	 ("epigraph_single"  . "@@html:<div class=\"epigraph\"><blockquote>$1</blockquote></div>@@")
+         ("epigraph3" . "@@html:<div class=\"epigraph\"><blockquote>$1<footer>$2, <cite>$3</cite></footer></blockquote></div>@@")
+         ("kbd"       . "@@html:<kbd>$1</kbd>@@@@latex:\\texttt{$1}@@")
+	 ("margimg"
+ . "@@html:<aside class=\"marginnote\"><figure class=\"mn-fig\"><img src=\"$1\" alt=\"$2\" class=\"mn-img\" loading=\"lazy\" decoding=\"async\"/>$3</figure></aside>@@")
+
+       
+       org-export-global-macros)))
+
+
 (defvar z-preamble
-  "<nav>
-  <a href=\"/\">Home | </a>
-  <a href=\"/posts/posts-list.html\">Posts | </a>
-  <a href=\"/blogs/blogs-list.html\">Blogs | </a>
-  <a href=\"/contact.html\">Contact</a>
-</nav>
-<div id=\"updated\">Updated: %C</div>"
+  "
+<div class=\"banner-header\">
+  <a href=\"/\"> <img src=\"/assets/images/gr.png\" alt=\"Site Logo\" class=\"banner-logo\" /> </a>
+  <nav>
+    <a href=\"/\">Home | </a>
+    <a href=\"/posts/posts-list.html\">Posts | </a>
+    <a href=\"/blogs/blogs-list.html\">Blogs | </a>
+    <a href=\"/contact.html\">Contact</a>
+  </nav>
+  <button class=\"theme-toggle\" id=\"theme-toggle\" type=\"button\" aria-label=\"Toggle dark mode\">🌗 Theme</button>
+  </div>
+  <div id=\"updated\">Updated: %C</div>
+
+"
 )
 
 (defvar z-postamble
@@ -61,12 +82,12 @@ Created with %c on <a href=\"https://www.archlinux.org/\">Arch</a> <a href=\"htt
 </footer>")
 
 
-
 (defun z/posts-sitemap (title list)
   "sitemap that lists post links as bullet points with dates and tags."
   (concat
    "#+TITLE: " title "\n"
    "#+OPTIONS: toc:nil num:nil \n\n"
+   "See the categories: @@html:<a href=\"../categories.html\">Categories</a>@@\n\n"
    "* Posts:\n"
    (mapconcat
     (lambda (entry)
@@ -90,7 +111,7 @@ Created with %c on <a href=\"https://www.archlinux.org/\">Arch</a> <a href=\"htt
             (let* ((tags (cadr (assoc "FILETAGS" (org-collect-keywords '("FILETAGS"))))))
               (when tags
                 (setq tags-str (mapconcat (lambda (tag)
-                                            (format "@@html:<span class=\"post-tag\">%s</span>@@" tag))
+					    (format "@@html:<a href=\"/tags/%s.html\"> <span class=\"post-tag\">%s</span> </a>@@" tag tag))
                                           (split-string tags ":" t)  ;; <- Splits by ":" and removes empty strings
                                           " "))))))
         ;; Final line output
@@ -104,7 +125,8 @@ Created with %c on <a href=\"https://www.archlinux.org/\">Arch</a> <a href=\"htt
   (concat
    "#+TITLE: " title "\n"
    "#+OPTIONS: toc:nil num:nil \n\n"
-   "* Posts:\n"
+   "See the categories: @@html:<a href=\"../categories.html\">Categories</a>@@\n\n"
+   "* Blogs:\n"
    (mapconcat
     (lambda (entry)
       (let* ((link (car entry))
@@ -127,7 +149,7 @@ Created with %c on <a href=\"https://www.archlinux.org/\">Arch</a> <a href=\"htt
             (let* ((tags (cadr (assoc "FILETAGS" (org-collect-keywords '("FILETAGS"))))))
               (when tags
                 (setq tags-str (mapconcat (lambda (tag)
-                                            (format "@@html:<span class=\"post-tag\">%s</span>@@" tag))
+                                            (format "@@html:<a href=\"/tags/%s.html\"> <span class=\"post-tag\">%s</span> </a>@@" tag tag))
                                           (split-string tags ":" t)  ;; <- Splits by ":" and removes empty strings
                                           " "))))))
         ;; Final line output
@@ -136,30 +158,146 @@ Created with %c on <a href=\"https://www.archlinux.org/\">Arch</a> <a href=\"htt
     "\n")))
 
 
+
+(defun z/categories-sitemap (title _list)
+  "Generate a categories page by scanning tags across org-posts and org-blogs."
+  (let* ((expanded (org-publish-expand-projects org-publish-project-alist))
+         (posts    (assoc "org-posts" expanded))
+         (blogs    (assoc "org-blogs" expanded))
+         ;; DO NOT set :exclude to "" — it excludes everything
+         (files (cl-remove-duplicates
+                 (append (and posts (org-publish-get-base-files posts))
+                         (and blogs (org-publish-get-base-files blogs)))
+                 :test #'file-equal-p))
+         ;; optional: drop the generated sitemaps
+         (files (cl-remove-if
+                 (lambda (f)
+                   (member (file-name-nondirectory f)
+                           '("posts-list.org" "blogs-list.org" "sitemap.org" "categories.org")))
+                 files))
+         (counts (make-hash-table :test 'equal)))
+    ;;(message "files I will scan: %S" files)
+    (dolist (f files)
+      (when (file-readable-p f)
+        (with-temp-buffer
+          (insert-file-contents f)
+          (org-mode)
+          (let* ((kw (org-collect-keywords '("FILETAGS" "TAGS")))
+                 (raw (car (or (cdr (assoc "FILETAGS" kw))
+                               (cdr (assoc "TAGS" kw))))))
+            (when raw
+              (dolist (tag (split-string raw ":" t))
+                (puthash tag (1+ (gethash tag counts 0)) counts)))))))
+
+    (let (tags)
+      (maphash (lambda (k _) (push k tags)) counts)
+      (setq tags (sort tags #'string-lessp))
+      (concat
+       "#+TITLE: " title "\n#+OPTIONS: toc:nil num:nil title:nil\n\n* Categories (Includes both blogs and posts)\n"
+       (if tags
+	   (mapconcat
+	    (lambda (tag)
+	      (format "- [[file:tags/%s.org][@@html:<span class=\"post-tag\">%s</span>@@]] (%d)"
+		      (z/tag-slug tag) tag (gethash tag counts))
+	      )
+	    tags
+	    "\n")
+         "_No tags found yet._")))))
+
+
+(defun z/tag-slug (s)
+  "Turn a tag into a safe filename."
+  (let ((down (downcase s)))
+    (replace-regexp-in-string "[^a-z0-9]+" "-" down)))
+
+(defun z/collect-post-files ()
+  "Return all .org files from org-posts and org-blogs."
+  (let* ((expanded (org-publish-expand-projects org-publish-project-alist))
+         (posts    (assoc "org-posts" expanded))
+         (blogs    (assoc "org-blogs" expanded)))
+    (cl-remove-duplicates
+     (append (and posts (org-publish-get-base-files posts))
+             (and blogs (org-publish-get-base-files blogs)))
+     :test #'file-equal-p)))
+
+(defun z/gather-tag-index ()
+  "Return hash: tag -> list of (FILE TITLE DATE-ISO)."
+  (let ((idx (make-hash-table :test 'equal)))
+    (dolist (f (z/collect-post-files))
+      (when (and (string-match-p "\\.org\\'" f)
+                 (file-readable-p f)
+                 ;; ignore generated lists
+                 (not (member (file-name-nondirectory f)
+                              '("posts-list.org" "blogs-list.org" "sitemap.org" "categories.org"))))
+        (with-temp-buffer
+          (insert-file-contents f)
+          (org-mode)
+          (let* ((kw (org-collect-keywords '("TITLE" "FILETAGS" "TAGS" "DATE")))
+                 (title (or (car (cdr (assoc "TITLE" kw)))
+                            (file-name-base f)))
+                 (date  (or (car (cdr (assoc "DATE" kw))) "")) ;; optional
+                 (raw   (car (or (cdr (assoc "FILETAGS" kw))
+                                 (cdr (assoc "TAGS" kw))))))
+            (when raw
+              (dolist (tag (split-string raw ":" t))
+                (push (list f title date) (gethash tag idx))))))))
+    idx))
+
+(defun z/write-tag-pages ()
+  "Generate tags/*.org pages listing posts for each tag."
+  (let* ((site-root (expand-file-name "~/master-folder/org_files/org_web/"))
+         (tags-dir  (expand-file-name "tags" site-root)))
+    (unless (file-directory-p tags-dir)
+      (make-directory tags-dir t))
+    (let ((idx (z/gather-tag-index)))
+      (maphash
+       (lambda (tag items)
+         (let* ((slug (z/tag-slug tag))
+                (outfile (expand-file-name (format "%s.org" slug) tags-dir)))
+           (with-temp-file outfile
+             (insert (format "#+TITLE: Tag: %s\n#+OPTIONS: toc:nil num:nil title:nil \n\n* Posts tagged %s\n"
+                             tag tag))
+             ;; sort newest first if DATE present
+             (setq items (sort items (lambda (a b) (string> (nth 2 a) (nth 2 b)))))
+             (dolist (it items)
+               (let* ((file (nth 0 it))
+                      (title (nth 1 it))
+                      (rel   (file-relative-name file tags-dir)))
+                 ;; link to the source .org; org-publish will rewrite to the .html
+                 (insert (format "- [[file:%s][%s]]\n" rel title)))))))
+       idx)
+      )))
+
+
 ;; Define the publishing project
 (setq org-publish-project-alist
-      `(("org-notes"
+      `(("org-main"
          :recursive t
          :base-directory "~/master-folder/org_files/org_web/"
          :publishing-function org-html-publish-to-html
          :publishing-directory "~/master-folder/org_files/org_web/output"
-         :with-author nil
-         :with-creator t
-         :with-toc t
          :base-extension "org"
-         :section-numbers nil
-         :time-stamp-file nil
+	 :auto-sitemap t
+	 :sitemap-filename "sitemap.org"
+	 :sitemap-title "Sitemap"
+	 :sitemap-sort-files chronologically
          :html-preamble ,z-preamble
          :html-postamble ,z-postamble
-	 :html-head "
-<link rel=\"stylesheet\" type=\"text/css\" href=\"https://gongzhitaao.org/orgcss/org.css\" />
-<link rel=\"stylesheet\" href=\"style.css\" />
-<script src=\"script.js\" defer></script>
-"
-	)
+	 :html-head ,z-shared-head)
+	("org-categories-sitemap"
+         :recursive t
+         :base-directory "~/master-folder/org_files/org_web/"
+         :publishing-directory "~/master-folder/org_files/org_web/output"
+         :base-extension "org"
+	 :auto-sitemap t
+	 :sitemap-filename "categories.org"
+	 :sitemap-title "Categories"
+	 :sitemap-function z/categories-sitemap
+         :html-preamble ,z-preamble
+         :html-postamble ,z-postamble
+	 :html-head ,z-shared-head)
         ("org-posts"
          :base-directory "~/master-folder/org_files/org_web/posts"
-         :base-extension "org"
          :publishing-directory "~/master-folder/org_files/org_web/output/posts/"
          :recursive t
          :base-extension "org"
@@ -169,22 +307,16 @@ Created with %c on <a href=\"https://www.archlinux.org/\">Arch</a> <a href=\"htt
          :html-validation-link nil
          :with-toc t
          :section-numbers t
-         :html-preamble ,z-preamble
+	 :html-preamble ,z-preamble
          :html-postamble ,z-postamble
 	 :auto-sitemap t
 	 :sitemap-filename "posts-list.org"
 	 :sitemap-title "Posts List"
 	 :sitemap-style list
 	 :sitemap-function z/posts-sitemap
-	 :html-head "
-<link rel=\"stylesheet\" type=\"text/css\" href=\"https://gongzhitaao.org/orgcss/org.css\" />
-<link rel=\"stylesheet\" href=\"../style.css\" />
-<script src=\"../script.js\" defer></script>
-"
-	 )
-        ("org-blogs"
+	 :html-head ,z-shared-head)
+	("org-blogs"
          :base-directory "~/master-folder/org_files/org_web/blogs"
-         :base-extension "org"
          :publishing-directory "~/master-folder/org_files/org_web/output/blogs/"
          :recursive t
          :base-extension "org"
@@ -192,8 +324,6 @@ Created with %c on <a href=\"https://www.archlinux.org/\">Arch</a> <a href=\"htt
          :with-author nil
          :with-creator nil
          :html-validation-link nil
-         :with-toc t
-         :section-numbers t
          :html-preamble ,z-preamble
          :html-postamble ,z-postamble
 	 :auto-sitemap t
@@ -201,34 +331,34 @@ Created with %c on <a href=\"https://www.archlinux.org/\">Arch</a> <a href=\"htt
 	 :sitemap-title "Blogs List"
 	 :sitemap-style list
 	 :sitemap-function z/blogs-sitemap
-	 :html-head "
-<link rel=\"stylesheet\" type=\"text/css\" href=\"https://gongzhitaao.org/orgcss/org.css\" />
-<link rel=\"stylesheet\" href=\"../style.css\" />
-<script src=\"../script.js\" defer></script>
-"
-	 )
-
-
-        ("org-assets"
+	 :html-head ,z-shared-head)
+	("org-tags"
+	 :base-directory "~/master-folder/org_files/org_web/tags"
+	 :publishing-directory "~/master-folder/org_files/org_web/output/tags"
+	 :recursive t
+	 :base-extension "org"
+	 :publishing-function org-html-publish-to-html
+	 :with-author nil
+	 :with-creator nil
+	 :html-preamble ,z-preamble
+	 :html-postamble ,z-postamble
+	 :html-head ,z-shared-head)
+	("org-assets"
          :base-directory "~/master-folder/org_files/org_web/assets/"
          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|svg\\|pdf\\|woff\\|woff2\\|ttf"
          :publishing-directory "~/master-folder/org_files/org_web/output/assets/"
          :recursive t
          :publishing-function org-publish-attachment)
-        ("org-static"
-         :base-directory "~/master-folder/org_files/org_web/"
-         :base-extension "css\\|js"
-         :publishing-directory "~/master-folder/org_files/org_web/output"
-         :recursive t
-         :publishing-function org-publish-attachment)
-
-        ("website"
-         :components ("org-notes" "org-assets" "org-posts" "org-blogs" "org-static"))))
+	))
 
 (delete-directory "~/master-folder/org_files/org_web/output/" t)
+(delete-directory "~/master-folder/org_files/org_web/tags/" t)
 (message "Directory deleted")
 
 ;; Generate the site output
+(z/write-tag-pages)
 (org-publish-all t)
 
 (message "Build complete!")
+
+;;; build-site.el ends here

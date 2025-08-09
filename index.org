@@ -1,9 +1,11 @@
-#+TITLE: Zaine Qayyum
-#+OPTIONS: toc:nil num:nil
+#+TITLE: Home Page
+#+OPTIONS: num:nil title:nil
+#+DATE: <2025-08-04 Mon>
 
 * Welcome! 🌱
 
-This is a website built using Emacs Org-mode and published using ~org-publish~.
+This is a website built using Emacs Org-mode and published using ~org-publish~. {{{sidenote(1, The very first iteration of this website used the Angular framework\, only after a while I realised (as every Emacs lover does) that I want to make this an Emacs-centric project)}}}
+
 
 Feel free to explore:
 
@@ -11,17 +13,21 @@ Feel free to explore:
 - [[file:posts/posts-list.org][Posts Page]]
 - [[file:blogs/blogs-list.org][Blogs Page]]
 - [[file:setup.org][Setup Page]]
-  
+- [[file:sitemap.org][Sitemap]]
+
 * How to publish web pages using ~org-publish~
 
 This website is heavily inspired by some people who have decided to use ~org-publish~ as a way to convert ~org~ files into ~html~. I came across a few that took the plunge and decided to migrate from platforms like Wordpress and instead opted for a more transparent, text-based workflow.
 
+The Org website[fn:1] now looks a lot better than it used to.
+
 There is a [[https://en.wikipedia.org/wiki/Unix_philosophy][Unix philosophy]] that emphasises building simple and compact code that can be easily maintainable, and following this approach (do one thing well) aligns with this philosophy.
 
-So how does one go about publishing web pages through Emacs's ~org-publish~? The answer is quite simple. You probably will need to have some familiarity with ~elisp~ although it's not a must.
+So how does one go about publishing web pages through Emacs's ~org-publish~? The answer is quite simple. You probably will need to have some familiarity with ~elisp~[fn:2] although it's not a must.
 
 The first thing we will want to do is edit our ~init.el~ file, which is the *initialization* file. In this file we want to add the following:
 
+/This is a simple and quick way of getting this setup, although there is a better and more scalable approach to this, where we have a build script that runs each time we want to generate the project. See [[file:setup.org][here]] for more details./
 
 #+begin_src emacs-lisp
 
@@ -86,3 +92,9 @@ And there we go! The files are now being hosted on ~http://localhost:8000/~ and 
 * Contact
 
 Feel free to reach out on GitHub: https://github.com/zainezq
+
+
+
+[fn:1] See: https://orgmode.org/manual/Publishing.html
+
+[fn:2] Emacs Lisp is a Lisp dialect made for Emacs. See: https://en.wikipedia.org/wiki/Emacs_Lisp

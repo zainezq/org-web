@@ -1,6 +1,11 @@
 #+TITLE: Blogs List
 #+OPTIONS: toc:nil num:nil 
 
-* Posts:
-- [[file:blogs-intro.org][Blogs Introduction]] @@html:<span class="post-date">2025-08-08</span>@@ @@html:<span class="post-tag">introduction</span>@@
-- [[file:zettelkasten.org][Zettelkasten Method]] @@html:<span class="post-date">2025-08-05</span>@@ @@html:<span class="post-tag">education</span>@@
+See the categories: @@html:<a href="../categories.html">Categories</a>@@
+
+* Blogs:
+- [[file:2025/08/spending-the-whole-day-on-this-website.org][09-08-2025: Website Changes]] @@html:<span class="post-date">2025-08-09</span>@@ @@html:<a href="/tags/emacs.html"> <span class="post-tag">emacs</span> </a>@@ @@html:<a href="/tags/website.html"> <span class="post-tag">website</span> </a>@@
+- [[file:2025/08/wacom-with-arch.org][Wacom With Arch]] @@html:<span class="post-date">2025-08-08</span>@@ @@html:<a href="/tags/insights.html"> <span class="post-tag">insights</span> </a>@@
+- [[file:2025/08/what-do-i-want-to-do-with-emacs.org][What Do I Want To Do With Emacs]] @@html:<span class="post-date">2025-08-08</span>@@ @@html:<a href="/tags/emacs.html"> <span class="post-tag">emacs</span> </a>@@ @@html:<a href="/tags/review.html"> <span class="post-tag">review</span> </a>@@
+- [[file:2025/08/zettelkasten.org][Zettelkasten Method]] @@html:<span class="post-date">2025-08-07</span>@@ @@html:<a href="/tags/education.html"> <span class="post-tag">education</span> </a>@@
+- [[file:blogs-intro.org][Blogs Introduction]] @@html:<span class="post-date">2025-08-06</span>@@ @@html:<a href="/tags/introduction.html"> <span class="post-tag">introduction</span> </a>@@

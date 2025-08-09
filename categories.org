@@ -1,0 +1,10 @@
+#+TITLE: Categories
+#+OPTIONS: toc:nil num:nil title:nil
+
+* Categories (Includes both blogs and posts)
+- [[file:tags/education.org][@@html:<span class="post-tag">education</span>@@]] (1)
+- [[file:tags/emacs.org][@@html:<span class="post-tag">emacs</span>@@]] (2)
+- [[file:tags/insights.org][@@html:<span class="post-tag">insights</span>@@]] (1)
+- [[file:tags/introduction.org][@@html:<span class="post-tag">introduction</span>@@]] (2)
+- [[file:tags/review.org][@@html:<span class="post-tag">review</span>@@]] (1)
+- [[file:tags/website.org][@@html:<span class="post-tag">website</span>@@]] (1)

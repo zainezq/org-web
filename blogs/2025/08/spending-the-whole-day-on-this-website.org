@@ -1,0 +1,36 @@
+#+TITLE: 09-08-2025: Website Changes
+#+OPTIONS: num:nil title:nil
+#+DATE: <2025-08-09 Sat>
+#+FILETAGS: :emacs:website:
+
+* What was worked on
+
+I saw a few websites that used marginal notes on the right side of the screen like [[https://ogbe.net/blog/emacs_org_static_site][this one]], so I decided to try and implement this feature in this wesbite. In my mind I thought of using an external pre-configured CSS that I can just insert and ta-da it would work.
+
+How wrong I was.
+
+See, this website is published with ~org-publish~, meaning the org files that are written are converted to HTML through a transcoder. And as I already had a ~org.css~[fn:1] stylesheet which was primarily used for syntax highlighting, it caused some layout and formatting issue when I tried to use something like ~tufte.css~[fn:2]. Anyways, long story short, the main thing I worked on today was styling this website, and ensuring certain macros worked:
+
+#+BEGIN_SRC emacs-lisp
+
+  (setq org-export-global-macros
+        (append
+         '(("sidenote"
+            . "@@html:<label for=\"sn$1\" class=\"margin-toggle sidenote-number\"></label><input type=\"checkbox\" id=\"sn$1\" class=\"margin-toggle\"/><span class=\"sidenote\">$2</span>@@")
+  	 ("epigraph"  . "@@html:<div class=\"epigraph\"><blockquote>$1<footer>$2</footer></blockquote></div>@@")
+  	 ("epigraph_single"  . "@@html:<div class=\"epigraph\"><blockquote>$1</blockquote></div>@@")
+           ("epigraph3" . "@@html:<div class=\"epigraph\"><blockquote>$1<footer>$2, <cite>$3</cite></footer></blockquote></div>@@")
+           ("kbd"       . "@@html:<kbd>$1</kbd>@@@@latex:\\texttt{$1}@@")
+  	 ("margimg"
+  	  . "@@html:<aside class=\"marginnote\"><figure class=\"mn-fig\"><img src=\"$1\" alt=\"$2\" class=\"mn-img\" loading=\"lazy\" decoding=\"async\"/>$3</figure></aside>@@")
+  	 
+  	 org-export-global-macros)))
+
+#+END_SRC
+
+This worked quite nicely, and I made sure to make these changes accessible on smaller devices. Anyways, I quite like this style of posting. Nothing formal nor technical, just a bunch of rambling on about random things.
+
+Oh, and also there's a darkmode theme switch now for you night owls.
+
+[fn:1] See: https://gongzhitaao.org/orgcss/
+[fn:2] See: https://edwardtufte.github.io/tufte-css/

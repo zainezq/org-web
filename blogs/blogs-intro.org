@@ -1,6 +1,6 @@
 #+TITLE: Blogs Introduction
 #+OPTIONS: toc:nil num:nil
-#+DATE: <2025-08-08 Fri>
+#+DATE: <2025-08-06 Wed>
 #+FILETAGS: :introduction:
 
 * Introduction

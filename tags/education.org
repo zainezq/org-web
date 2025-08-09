@@ -1,0 +1,5 @@
+#+TITLE: Tag: education
+#+OPTIONS: toc:nil num:nil title:nil 
+
+* Posts tagged education
+- [[file:../blogs/2025/08/zettelkasten.org][Zettelkasten Method]]

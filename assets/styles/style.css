@@ -1,0 +1,670 @@
+/* =========================
+   Theme variables
+   ========================= */
+:root{
+    /* Layout */
+    --content: 880px;
+    --gutter:  2rem;
+    --margin:  420px;
+    --body-pad: 1rem; 
+
+    /* Fullwidth media tuning */
+    --bleed: 48px; 
+    --fullwidth-cap: 860px;
+
+    /* Colors */
+    --bg: #faf9f6;
+    --fg: #000000;
+    --link: #1a0dab;
+    --heading: #004c99;
+    --code-bg: #f0f0f0;
+    --active-toc: #cacaca;
+
+    /* Notes */
+    --note-color: #555;
+    --note-bg: transparent;
+}
+
+/* =========================
+   Base
+   ========================= */
+html, body{
+    background-color: var(--bg);
+    color: var(--fg);
+    font-size: 16px;
+    transition: background-color .3s, color .3s;
+    margin: 0;
+}
+
+h1, h2, h3{ color: var(--heading); }
+
+a {
+  color: var(--link);
+  text-decoration: none; /* removes underline by default */
+}
+
+a:hover {
+  text-decoration: underline; /* only show on hover */
+}
+
+/* =========================
+   Header / Banner
+   ========================= */
+.banner-header{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: .5rem 1rem;
+    border-radius: 6px;
+}
+.banner-logo{
+    height: 80px; width: auto;
+    margin-right: 1.5rem; border-radius: 50%;
+}
+nav{
+    display: flex; gap: 1rem;
+    font-weight: 600; font-size: 1.1rem;
+}
+#updated{
+    font-size: .8rem; color: var(--fg);
+    margin: .5rem 0 1rem; font-style: italic;
+}
+/* Mobile banner */
+@media (max-width: 600px){
+    .banner-header{ flex-direction: column; align-items: center; text-align: center; }
+    .banner-logo{ margin: 0 0 .5rem 0; }
+    nav{ flex-wrap: wrap; justify-content: center; gap: .5rem; font-size: 1rem; }
+}
+/* Make the preamble align with the content column + right rail */
+#preamble.status{
+    max-width: var(--content);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--body-pad);
+    padding-right: var(--body-pad);
+    box-sizing: content-box;
+}
+
+#preamble .banner-header,
+#preamble #updated{
+    max-width: 100%;
+}
+
+@media (max-width: 1100px){
+    #preamble.status{
+      padding-right: var(--body-pad);
+  }
+}
+
+/* =========================
+   Footer
+   ========================= */
+footer{
+    color: var(--fg);
+    padding: 1rem; margin-top: 2rem;
+    border-radius: 6px; text-align: center;
+    font-size: .9rem; font-style: italic;
+}
+
+/* =========================
+   Content column + reserved right margin
+   ========================= */
+#content.content{
+  max-width: var(--content);
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: var(--body-pad);
+  padding-right: var(--body-pad);
+  box-sizing: content-box;
+  position: relative; /* fine to keep */
+}
+
+
+/* Figures & normal images obey text column */
+#content .figure,
+#content img:not(.fullwidth){
+    max-width: 100%;
+    height: auto;
+}
+
+/* =========================
+   Sidenotes (Tufte-like)
+   ========================= */
+/* HTML pattern:
+   label.margin-toggle.sidenote-number + input.margin-toggle + span.sidenote
+*/
+/* Sidenotes: float-right inside #content, then push them into the right gutter+edge */
+.sidenote,
+.marginnote{
+    float: right;
+    width: var(--margin);
+    margin-right: calc(-1 * ( (95vw - var(--content)) / 2 ));
+    padding-left: var(--gutter);
+    overflow-wrap: break-word;    /* preferred */
+    word-wrap: break-word;        /* legacy support */
+    word-break: break-word;       /* safety for stubborn cases */
+    margin-top: .3rem;
+    margin-bottom: .6rem;
+    font-size: .95rem;
+    line-height: 1.35;
+    color: var(--note-color);
+    background: var(--note-bg);
+    box-sizing: border-box;
+}
+
+/* Optional: show the same footnote number in the margin */
+.footnote-sidenote::before{
+  content: attr(data-fn) " ";
+  font-size: 0.85em;
+  vertical-align: super;
+  margin-right: 0.2rem;
+  opacity: 0.85;
+}
+/* Sidenote numbering */
+body{ counter-reset: sidenote-counter; }
+.sidenote-number:after{
+    counter-increment: sidenote-counter;
+    content: counter(sidenote-counter);
+    font-size: .85em;
+    vertical-align: super;
+    margin-left: .15rem;
+}
+
+/* Hide checkbox toggles (kept for mobile patterns if added later) */
+.margin-toggle{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Safety: only big blocks should clear floats to avoid gaps */
+#content .figure,
+#content .org-src-container,
+#content img.fullwidth{
+    //clear: both;
+}
+
+/* =========================
+   Fullwidth media (centered, modest bleed, no collision)
+   ========================= */
+.fullwidth{
+    display: block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    height: auto;
+    margin: 1.25rem 0 1.75rem;
+    width: 100%;
+    max-width: min(
+	calc(var(--content) + var(--bleed) * 2),     /* centered bleed */
+	var(--fullwidth-cap),                        /* absolute cap */
+	calc(100vw - 2 * var(--body-pad))            /* never cause horizontal scroll */
+    );
+}
+.figure .fullwidth{ width: inherit; }           /* if img sits inside a figure */
+.figure figcaption{
+    text-align: center; font-size: .95rem; color: #666; margin-top: .4rem;
+}
+
+@media (max-width: 1100px){
+  #content.content{
+    padding-right: var(--body-pad);
+  }
+  .sidenote,
+  .marginnote{
+    float: none;
+    clear: both;
+    width: auto;
+    display: block;          /* ⬅ make them start on a new line */
+    margin: 0.5rem 0 0.75rem; /* spacing above/below */
+    padding-left: 0.75rem;
+    border-left: 3px solid rgba(0,0,0,.08);
+    margin-right: 0;
+  }
+  .fullwidth{
+    max-width: calc(100vw - 2 * var(--body-pad));
+  }
+}
+
+
+/* Ultra-wide comfort tweaks */
+/* @media (min-width: 1600px){ */
+/*     :root{ --content: 720px; --margin: 360px; } */
+/* } */
+
+/* =========================
+   Code highlighting (Org-mode classes)
+   ========================= */
+.org-comment        { color: #b22222; }      /* comments */
+.org-string         { color: #8b2252; }      /* string literals */
+.org-keyword        { color: #a020f0; }      /* keywords */
+.org-builtin        { color: #483d8b; }      /* builtins */
+.org-constant       { color: #008b8b; }      /* constants / numbers */
+.org-function-name  { color: #0000ff; }      /* function names */
+.org-variable-name  { color: sienna; }       /* variables */
+.org-type           { color: #228b22; }      /* types/classes */
+.org-preprocessor   { color: #483d8b; }      /* #define, import, etc. */
+.org-doc            { color: #8b2252; }      /* docstrings */
+.org-warning        { color: #ff8c00; font-weight: 700; } /* warnings */
+
+/* Inline code */
+:not(pre) > code{
+    padding: 2px 5px; margin: 0 1px;
+    border: 1px solid #ddd; border-radius: 3px;
+    background-clip: padding-box;
+    color: #333; font-size: 80%;
+}
+pre {
+    background-color: var(--bg);
+}
+/* Code blocks */
+.org-src-container{
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    font-family: Lucida Console, monospace;
+    font-size: 80%;
+    margin: 1em auto;
+    padding: .1em .5em;
+    position: relative;
+}
+.org-src-container > pre{ overflow: auto; }
+
+/* Language badges (optional) */
+.org-src-container > pre:before{
+    display: block; position: absolute; top: 0; right: 0;
+    background-color: #b3b3b3; color: #fff;
+    padding: 0 .5em; border-bottom-left-radius: 8px; border: 0;
+    font-size: 80%;
+}
+.org-src-container > pre.src-bash:before        { content: "bash"; }
+.org-src-container > pre.src-sh:before          { content: "sh"; }
+.org-src-container > pre.src-shell:before       { content: "shell"; }
+.org-src-container > pre.src-python:before      { content: "Python"; }
+.org-src-container > pre.src-emacs-lisp:before  { content: "Emacs Lisp"; }
+.org-src-container > pre.src-js:before,
+.org-src-container > pre.src-javascript:before  { content: "Javascript"; }
+.org-src-container > pre.src-typescript:before  { content: "Typescript"; }
+.org-src-container > pre.src-html:before        { content: "HTML"; }
+.org-src-container > pre.src-css:before         { content: "CSS"; }
+.org-src-container > pre.src-c:before           { content: "C"; }
+.org-src-container > pre.src-cpp:before         { content: "C++"; }
+.org-src-container > pre.src-java:before        { content: "Java"; }
+.org-src-container > pre.src-rust:before        { content: "Rust"; }
+.org-src-container > pre.src-R:before           { content: "R"; }
+
+/* Org copy button on blocks */
+.copy-btn{
+    position: absolute; top: .4em; right: .4em;
+    background-color: var(--code-bg); color: var(--heading);
+    border: 1px solid var(--heading); border-radius: 4px;
+    padding: .2em .6em; font-size: .8rem; cursor: pointer; z-index: 10;
+    transition: background-color .3s;
+}
+.copy-btn:hover{ background-color: var(--heading); color: var(--code-bg); }
+
+/* Org’s default pre label removal if duplicated elsewhere */
+pre.src::before{ content: none !important; }
+pre.src{
+    padding: 1.5em 1em 1em;
+    font-family: "Fira Mono","Courier New",monospace;
+    font-size: .9rem; line-height: 1.4;
+    overflow-x: auto; white-space: pre-wrap;
+}
+
+/* =========================
+   Lists with post meta chips
+   ========================= */
+.post-date{ color: pink; font-size: .9em; margin-left: 8px; }
+
+/* Post tag chip no longer needs a clearfix */
+.post-tag{
+    float: right;
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #444;
+    border-radius: 5px;
+    padding: 2px 6px;
+    margin-left: 6px;
+    font-size: 0.8em;
+}
+/* Shared base styles for all lists */
+ul, ol {
+  margin: 1rem 0 1.5rem 1.5rem; /* space above/below and indent */
+  padding: 0;
+  line-height: 1.5;
+}
+
+/* Unordered lists: custom bullet */
+ul {
+  list-style: none; /* remove default bullet */
+}
+ul li {
+  position: relative;
+  padding-left: 1.2em; /* space for custom bullet */
+}
+ul li::before {
+  content: "•"; /* bullet character */
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--heading); /* matches your headings color */
+  font-weight: bold;
+}
+
+/* Ordered lists: styled numbers */
+ol {
+  counter-reset: list-counter;
+  list-style: none; /* remove default numbering */
+}
+ol li {
+  counter-increment: list-counter;
+  position: relative;
+  padding-left: 1.8em; /* space for custom number */
+}
+ol li::before {
+  content: counter(list-counter) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--heading);
+  font-weight: bold;
+}
+
+/* List items: keep your float containment and spacing */
+li {
+  margin-bottom: 8px;
+  display: flow-root; /* contains floats like .post-tag */
+}
+
+/* Remove the old clearfix ::after */
+li::after {
+  content: none;
+}
+
+/* Nested lists: smaller bullet/number and reduced spacing */
+li ul,
+li ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+li ul li::before {
+  content: "–"; /* en dash for nested bullets */
+  font-weight: normal;
+  color: var(--note-color);
+}
+li ol li::before {
+  font-weight: normal;
+  color: var(--note-color);
+}
+/* Epigraph container: center and limit width */
+.epigraph {
+  margin: 2rem auto;
+  max-width: 80%; /* narrower than full text width */
+  font-style: italic;
+}
+
+/* Main blockquote style */
+.epigraph blockquote {
+  margin: 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--heading);
+  background-color: rgba(0, 0, 0, 0.02); /* subtle background */
+  color: var(--fg);
+  line-height: 1.6;
+}
+
+/* Footer inside blockquote: author/source */
+.epigraph blockquote footer {
+  margin-top: 0.75rem;
+  font-style: normal; /* turn off italic for attribution */
+  font-size: 0.9em;
+  color: var(--note-color);
+  text-align: right;
+}
+
+/* Cite: make source title distinct */
+.epigraph blockquote cite {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--link);
+}
+
+/* Optional: remove automatic quotes from <blockquote> in some browsers */
+.epigraph blockquote::before,
+.epigraph blockquote::after {
+  content: none;
+}
+/* =========================================
+   Dark mode — manual (data-theme) wins
+   ========================================= */
+:root {
+  /* optional: shared tokens for borders/chips */
+  --border: #d7d7d7;
+  --chip-bg: #f0f0f0;
+  --chip-fg: #444;
+  --muted: #666;
+}
+
+:root[data-theme="dark"]{
+  --bg: #0f1115;
+  --fg: #e6e6e6;
+  --link: #8ab4ff;
+  --heading: #9ecbff;
+  --code-bg: #1a1d24;
+
+  --note-color: #c2c7cf;
+  --note-bg: transparent;
+
+  --border: #2a2f3a;
+  --chip-bg: #1f2330;
+  --chip-fg: #cfd3da;
+  --muted: #a9b0bb;
+    --active-toc: #313131;
+
+}
+
+/* Auto scheme if no manual override is set */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg: #0f1115;
+    --fg: #e6e6e6;
+    --link: #8ab4ff;
+    --heading: #9ecbff;
+    --code-bg: #1a1d24;
+
+    --note-color: #c2c7cf;
+    --note-bg: transparent;
+
+    --border: #2a2f3a;
+    --chip-bg: #1f2330;
+    --chip-fg: #cfd3da;
+    --muted: #a9b0bb;
+  }
+}
+
+/* Tweak components that used fixed light colors */
+.figure figcaption{ color: var(--muted); }
+.post-tag{
+  background-color: var(--chip-bg);
+  color: var(--chip-fg);
+}
+.org-src-container{
+  border: 1px solid var(--border);
+  box-shadow: 3px 3px 3px rgba(0,0,0,.15);
+}
+:not(pre) > code{
+  border: 1px solid var(--border);
+  background-color: var(--code-bg);
+  color: var(--fg);
+}
+.epigraph blockquote{
+  border-left-color: var(--heading);
+  background-color: color-mix(in oklab, var(--bg) 94%, var(--fg) 6%);
+  color: var(--fg);
+}
+.epigraph blockquote footer{ color: var(--muted); }
+
+/* Mobile sidenote rule uses a light border; make it theme-aware */
+@media (max-width: 1100px){
+  .sidenote, .marginnote{
+    border-left: 3px solid color-mix(in oklab, var(--fg) 12%, transparent);
+  }
+}
+
+/* Theme toggle button positioning + transparent background */
+.theme-toggle {
+  position: fixed;
+  top: 0.75rem;
+  right: 1rem;
+  z-index: 1000;
+  border: 1px solid var(--border, #ccc);
+  background: transparent;
+  color: var(--fg);
+  padding: .35rem .7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+.theme-toggle:hover {
+  background-color: rgba(0,0,0,0.05); /* subtle hover tint */
+  color: var(--heading);
+  border-color: var(--heading);
+}
+
+/* Mobile: place next to nav links */
+@media (max-width: 600px) {
+  .theme-toggle {
+    position: static;
+    order: 2; /* after nav links in flex layout */
+    margin-left: .5rem;
+    padding: .3rem .6rem;
+    background: transparent;
+  }
+
+  .banner-header {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .banner-header nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+/* Margin/sidenote images */
+.sidenote .mn-fig,
+.marginnote .mn-fig{
+  margin: 0;
+}
+.sidenote .mn-img,
+.marginnote .mn-img{
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border, #d7d7d7);
+  border-radius: 6px;
+  background: var(--bg);
+}
+.sidenote .mn-fig figcaption,
+.marginnote .mn-fig figcaption{
+  margin-top: .35rem;
+  font-size: .85rem;
+  color: var(--muted, #666);
+  line-height: 1.35;
+}
+
+/* Mobile: these already stack under content via your media query; nothing special needed,
+   but we can soften the border a touch to match the mobile sidenote rule */
+@media (max-width: 1100px){
+  .sidenote .mn-img,
+  .marginnote .mn-img{
+    border-color: color-mix(in oklab, var(--fg) 12%, transparent);
+  }
+}
+.sidenote img {
+  margin-top: 0.35rem;
+  display: block;
+}
+/* .sidenote.footnote-sidenote img { */
+/*   margin-top: 0.35rem; */
+/*   display: block; */
+/* } */
+
+
+/* =========================
+   Left sticky Table of Contents (desktop)
+   ========================= */
+#table-of-contents{
+  /* push into the left gutter, mirroring .sidenote on the right */
+  float: left;
+  width: var(--margin);
+  margin-left: calc(-1 * ( (95vw - var(--content)) / 2 ));
+  padding-right: var(--gutter);
+  box-sizing: border-box;
+
+  /* sticky behavior */
+  position: sticky;
+  top: 5.5rem;                  /* clear your banner/header */
+  max-height: calc(100vh - 6rem);
+  overflow: auto;
+
+  /* look & feel */
+  font-size: .95rem;
+  border-right: 1px solid var(--border, #d7d7d7);
+  padding-top: .25rem;
+}
+
+#table-of-contents > h2{
+  margin: 0 0 .5rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  color: var(--muted, #666);
+}
+
+#text-table-of-contents ul{
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+#text-table-of-contents li{
+  margin: .25rem 0;
+}
+#text-table-of-contents a{
+  text-decoration: none;      /* no underline by default */
+}
+#text-table-of-contents a:hover{
+  text-decoration: underline;
+}
+
+/* Indent nested ToC levels a bit */
+#text-table-of-contents ul ul { margin-left: .75rem; opacity: .9; }
+
+/* Headings offset so anchors don’t hide under the sticky header */
+h2[id], h3[id], h4[id] { scroll-margin-top: 6.5rem; }
+
+/* =========================
+   Mobile / narrow view
+   ========================= */
+@media (max-width: 1100px){
+  #table-of-contents{
+    float: none;
+    position: static;          /* no sticky on small screens */
+    width: auto;
+    margin: 0 0 1rem;
+    padding: .5rem .75rem;
+    border-right: 0;
+    border-left: 3px solid color-mix(in oklab, var(--fg) 12%, transparent);
+    background: color-mix(in oklab, var(--bg) 96%, var(--fg) 4%);
+    border-radius: 4px;
+  }
+}
+#text-table-of-contents a.is-active{
+  // font-weight: 700;
+  text-decoration: underline;
+    background-color: var(--active-toc);
+    //border: 1px solid var(--border, #ccc);
+ 
+}

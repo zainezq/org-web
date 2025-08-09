@@ -1,0 +1,18 @@
+#+TITLE: Wacom With Arch
+#+DATE: <2025-08-08 Fri>
+#+OPTIONS: toc:nil num:nil title:nil
+#+FILETAGS: :insights:
+
+* Wacom With Arch
+
+I purchased a  [[https://www.wacom.com/en-gb/products/one-by-wacom][One by Wacom]] tablet almost 2 years ago now and it works flawlessly in both Windows and MacOS and even in most Linux distros with some configuration.
+
+However with Arch and Hyprland, there were some issues related to the ~xserver~ it was running on. The X input driver module (e.g. xf86-input-wacom) is linked into the X server which in turn is in charge of rendering and generic input events. Hyprland on the other hand uses the Wayland display server protocol (replacement for the X protocol) hence why there is difficulty in input mapping.
+
+I came across this issue as I was able to get the tablet to work across multiple monitors (mapping to a single one) through the ~xsetwacom~ function - which, at the time I was using Ubuntu. But with Hyprland there needs to be some manual intervention. I came across this [[https://thomaspurnell.com/003_wacom_graphics_hyprland/wacom_hyprland.html][post]] which explains nicely how to map the tablet to a single monitor. I took this approach with a slight configuration; in my ~hyprland.conf~ file, I simply added the following line:
+
+#+BEGIN_SRC
+  exec-once = hyprctl keyword "device[wacom-one-by-wacom-m-pen]:output" "DP-1"
+#+END_SRC
+
+which mapped the device to the primary monitor DP-1.
