@@ -6,7 +6,7 @@
 <!-- 2025-08-09 Sat 22:32 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Wacom With Arch</title>
+<title>09-08-2025: Website Changes</title>
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
   #content { max-width: 60em; margin: auto; }
@@ -209,35 +209,74 @@
   </nav>
   <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">🌗 Theme</button>
   </div>
-  <div id="updated">Updated: 2025-08-08 Fri 21:06</div>
+  <div id="updated">Updated: 2025-08-09 Sat 22:32</div>
 </div>
 <div id="content" class="content">
-<div id="outline-container-org31e0b44" class="outline-2">
-<h2 id="org31e0b44">Wacom With Arch</h2>
-<div class="outline-text-2" id="text-org31e0b44">
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2aedd6a">What was worked on</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2aedd6a" class="outline-2">
+<h2 id="org2aedd6a">What was worked on</h2>
+<div class="outline-text-2" id="text-org2aedd6a">
 <p>
-I purchased a  <a href="https://www.wacom.com/en-gb/products/one-by-wacom">One by Wacom</a> tablet almost 2 years ago now and it works flawlessly in both Windows and MacOS and even in most Linux distros with some configuration.
+I saw a few websites that used marginal notes on the right side of the screen like <a href="https://ogbe.net/blog/emacs_org_static_site">this one</a>, so I decided to try and implement this feature in this wesbite. In my mind I thought of using an external pre-configured CSS that I can just insert and ta-da it would work.
 </p>
 
 <p>
-However with Arch and Hyprland, there were some issues related to the <code>xserver</code> it was running on. The X input driver module (e.g. xf86-input-wacom) is linked into the X server which in turn is in charge of rendering and generic input events. Hyprland on the other hand uses the Wayland display server protocol (replacement for the X protocol) hence why there is difficulty in input mapping.
+How wrong I was.
 </p>
 
 <p>
-I came across this issue as I was able to get the tablet to work across multiple monitors (mapping to a single one) through the <code>xsetwacom</code> function - which, at the time I was using Ubuntu. But with Hyprland there needs to be some manual intervention. I came across this <a href="https://thomaspurnell.com/003_wacom_graphics_hyprland/wacom_hyprland.html">post</a> which explains nicely how to map the tablet to a single monitor. I took this approach with a slight configuration; in my <code>hyprland.conf</code> file, I simply added the following line:
+See, this website is published with <code>org-publish</code>, meaning the org files that are written are converted to HTML through a transcoder. And as I already had a <code>org.css</code><sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> stylesheet which was primarily used for syntax highlighting, it caused some layout and formatting issue when I tried to use something like <code>tufte.css</code><sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>. Anyways, long story short, the main thing I worked on today was styling this website, and ensuring certain macros worked:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-nil">exec-once = hyprctl keyword "device[wacom-one-by-wacom-m-pen]:output" "DP-1"
+<pre class="src src-emacs-lisp">
+(<span class="org-keyword">setq</span> org-export-global-macros
+      (append
+       '((<span class="org-string">"sidenote"</span>
+          . <span class="org-string">"@@html:&lt;label for=\"sn$1\" class=\"margin-toggle sidenote-number\"&gt;&lt;/label&gt;&lt;input type=\"checkbox\" id=\"sn$1\" class=\"margin-toggle\"/&gt;&lt;span class=\"sidenote\"&gt;$2&lt;/span&gt;@@"</span>)
+         (<span class="org-string">"epigraph"</span>  . <span class="org-string">"@@html:&lt;div class=\"epigraph\"&gt;&lt;blockquote&gt;$1&lt;footer&gt;$2&lt;/footer&gt;&lt;/blockquote&gt;&lt;/div&gt;@@"</span>)
+         (<span class="org-string">"epigraph_single"</span>  . <span class="org-string">"@@html:&lt;div class=\"epigraph\"&gt;&lt;blockquote&gt;$1&lt;/blockquote&gt;&lt;/div&gt;@@"</span>)
+         (<span class="org-string">"epigraph3"</span> . <span class="org-string">"@@html:&lt;div class=\"epigraph\"&gt;&lt;blockquote&gt;$1&lt;footer&gt;$2, &lt;cite&gt;$3&lt;/cite&gt;&lt;/footer&gt;&lt;/blockquote&gt;&lt;/div&gt;@@"</span>)
+         (<span class="org-string">"kbd"</span>       . <span class="org-string">"@@html:&lt;kbd&gt;$1&lt;/kbd&gt;@@@@latex:\\texttt{$1}@@"</span>)
+         (<span class="org-string">"margimg"</span>
+          . <span class="org-string">"@@html:&lt;aside class=\"marginnote\"&gt;&lt;figure class=\"mn-fig\"&gt;&lt;img src=\"$1\" alt=\"$2\" class=\"mn-img\" loading=\"lazy\" decoding=\"async\"/&gt;$3&lt;/figure&gt;&lt;/aside&gt;@@"</span>)
+
+         org-export-global-macros)))
+
 </pre>
 </div>
 
 <p>
-which mapped the device to the primary monitor DP-1.
+This worked quite nicely, and I made sure to make these changes accessible on smaller devices. Anyways, I quite like this style of posting. Nothing formal nor technical, just a bunch of rambling on about random things.
+</p>
+
+<p>
+Oh, and also there's a darkmode theme switch now for you night owls.
 </p>
 </div>
 </div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+See: <a href="https://gongzhitaao.org/orgcss/">https://gongzhitaao.org/orgcss/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+See: <a href="https://edwardtufte.github.io/tufte-css/">https://edwardtufte.github.io/tufte-css/</a>
+</p></div></div>
+
+
 </div>
+</div></div>
 <div id="postamble" class="status">
 <footer>
 <div class="copyright-container">
