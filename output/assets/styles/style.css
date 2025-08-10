@@ -335,6 +335,24 @@ pre.src{
     margin-left: 6px;
     font-size: 0.8em;
 }
+
+.filetags {
+  margin-top: .5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem .4rem;
+  font-size: .9rem;
+  color: #666;
+}
+.filetags .tag {
+  display: inline-block;
+  padding: .1rem .45rem;
+  border-radius: .5rem;
+  background: #f0f0f0;
+  line-height: 1.6;
+}
+
+
 /* Shared base styles for all lists */
 ul, ol {
   margin: 1rem 0 1.5rem 1.5rem; /* space above/below and indent */
