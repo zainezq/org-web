@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-08-10 Sun 20:55 -->
+<!-- 2025-08-10 Sun 22:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Setup</title>
@@ -194,7 +194,12 @@
 </style>
 
 <link rel="stylesheet" href="/assets/styles/style.css" />
+<link rel="stylesheet" href="/assets/styles/bigger-picture.min.css" />
+
 <script src="/assets/scripts/script.js" defer></script> 
+<script src="/assets/scripts/bigger-picture.min.js" defer></script>
+<script src="/assets/scripts/svg-pan-zoom.min.js" defer></script>
+<script src="/assets/scripts/gallery-init.js" defer></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -213,9 +218,9 @@
 </div>
 <div id="content" class="content">
 <h1 class="title">Setup</h1>
-<div id="outline-container-org32a3c56" class="outline-2">
-<h2 id="org32a3c56">Introduction</h2>
-<div class="outline-text-2" id="text-org32a3c56">
+<div id="outline-container-org74f1bdb" class="outline-2">
+<h2 id="org74f1bdb">Introduction</h2>
+<div class="outline-text-2" id="text-org74f1bdb">
 <p>
 <i>Last updated: <span class="timestamp-wrapper"><span class="timestamp">&lt;2025-08-10 Sun 20:42&gt;</span></span></i>
 </p>
@@ -230,9 +235,9 @@ This page will highlight the <code>build-script.el</code> used to generate this 
 </div>
 </div>
 </div>
-<div id="outline-container-orgbda3b74" class="outline-2">
-<h2 id="orgbda3b74">The script</h2>
-<div class="outline-text-2" id="text-orgbda3b74">
+<div id="outline-container-org0bbbe57" class="outline-2">
+<h2 id="org0bbbe57">The script</h2>
+<div class="outline-text-2" id="text-org0bbbe57">
 <p>
 The script is as follows, at the start I have some metadata relating to the file, followed by package management,then the declaration of variables/functions and finally the <code>org-publish-project-alist</code> which handles nearly all of the project generation instructions.
 </p>
@@ -645,9 +650,9 @@ Created with %c on &lt;a href=\"https://www.archlinux.org/\"&gt;Arch&lt;/a&gt; &
 </div>
 </div>
 </div>
-<div id="outline-container-org1d8a76e" class="outline-2">
-<h2 id="org1d8a76e">Publish Script</h2>
-<div class="outline-text-2" id="text-org1d8a76e">
+<div id="outline-container-orgaadd395" class="outline-2">
+<h2 id="orgaadd395">Publish Script</h2>
+<div class="outline-text-2" id="text-orgaadd395">
 <p>
 As the project is hosted on Github, I have created a small script that is able to push changes to the remote repository, which Cloudflare will automatically detect and rebuild the website:
 </p>

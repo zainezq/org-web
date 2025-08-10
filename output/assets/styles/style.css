@@ -2,8 +2,6 @@
    Theme variables
    ========================= */
 :root{
-    /* Layout */
-    
     --gutter:  2rem;
     --margin:  420px;
     --body-pad: 1rem;
@@ -14,21 +12,43 @@
     );
     --content-min: 60ch;
     --content-max: 880px;
-    /* Fullwidth media tuning */
     --bleed: 48px; 
     --fullwidth-cap: 860px;
-
-    /* Colors */
     --bg: #faf9f6;
     --fg: #000000;
     --link: #1a0dab;
     --heading: #004c99;
     --code-bg: #f0f0f0;
     --active-toc: #cacaca;
-
-    /* Notes */
     --note-color: #555;
     --note-bg: transparent;
+    --border: #d7d7d7;
+    --chip-bg: #f0f0f0;
+    --chip-fg: #444;
+    --muted: #666;
+}
+
+
+/* =========================================
+   Dark mode — manual (data-theme) wins
+   ========================================= */
+
+:root[data-theme="dark"]{
+    --bg: #0f1115;
+    --fg: #e6e6e6;
+    --link: #8ab4ff;
+    --heading: #9ecbff;
+    --code-bg: #1a1d24;
+    
+    --note-color: #c2c7cf;
+    --note-bg: transparent;
+    
+    --border: #2a2f3a;
+    --chip-bg: #1f2330;
+    --chip-fg: #cfd3da;
+    --muted: #a9b0bb;
+    --active-toc: #313131;
+
 }
 
 /* =========================
@@ -46,11 +66,11 @@ h1, h2, h3{ color: var(--heading); }
 
 a {
   color: var(--link);
-  text-decoration: none; /* removes underline by default */
+  text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline; /* only show on hover */
+  text-decoration: underline;
 }
 
 /* =========================
@@ -97,11 +117,7 @@ nav{
     max-width: 100%;
 }
 
-@media (max-width: 1250px){
-    #preamble.status{
-      padding-right: var(--body-pad);
-  }
-}
+
 
 /* =========================
    Footer
@@ -214,25 +230,7 @@ body{ counter-reset: sidenote-counter; }
     text-align: center; font-size: .95rem; color: #666; margin-top: .4rem;
 }
 
-@media (max-width: 1250px){
-  #content.content{
-    padding-right: var(--body-pad);
-  }
-  .sidenote,
-  .marginnote{
-    float: none;
-    clear: both;
-    width: auto;
-    display: block;          /* ⬅ make them start on a new line */
-    margin: 0.5rem 0 0.75rem; /* spacing above/below */
-    padding-left: 0.75rem;
-    border-left: 3px solid rgba(0,0,0,.08);
-    margin-right: 0;
-  }
-  .fullwidth{
-    max-width: calc(100vw - 2 * var(--body-pad));
-  }
-}
+
 
 
 /* Ultra-wide comfort tweaks */
@@ -277,7 +275,7 @@ pre {
 }
 .org-src-container > pre{ overflow: auto; }
 
-/* Language badges (optional) */
+/* Language badges */
 .org-src-container > pre:before{
     display: block; position: absolute; top: 0; right: 0;
     background-color: #b3b3b3; color: #fff;
@@ -460,34 +458,7 @@ li ol li::before {
 .epigraph blockquote::after {
   content: none;
 }
-/* =========================================
-   Dark mode — manual (data-theme) wins
-   ========================================= */
-:root {
-  /* optional: shared tokens for borders/chips */
-  --border: #d7d7d7;
-  --chip-bg: #f0f0f0;
-  --chip-fg: #444;
-  --muted: #666;
-}
 
-:root[data-theme="dark"]{
-  --bg: #0f1115;
-  --fg: #e6e6e6;
-  --link: #8ab4ff;
-  --heading: #9ecbff;
-  --code-bg: #1a1d24;
-
-  --note-color: #c2c7cf;
-  --note-bg: transparent;
-
-  --border: #2a2f3a;
-  --chip-bg: #1f2330;
-  --chip-fg: #cfd3da;
-  --muted: #a9b0bb;
-    --active-toc: #313131;
-
-}
 
 /* Auto scheme if no manual override is set */
 @media (prefers-color-scheme: dark){
@@ -529,13 +500,6 @@ li ol li::before {
   color: var(--fg);
 }
 .epigraph blockquote footer{ color: var(--muted); }
-
-/* Mobile sidenote rule uses a light border; make it theme-aware */
-@media (max-width: 1250px){
-  .sidenote, .marginnote{
-    border-left: 3px solid color-mix(in oklab, var(--fg) 12%, transparent);
-  }
-}
 
 /* Theme toggle button positioning + transparent background */
 .theme-toggle {
@@ -600,14 +564,7 @@ li ol li::before {
   line-height: 1.35;
 }
 
-/* Mobile: these already stack under content via your media query; nothing special needed,
-   but we can soften the border a touch to match the mobile sidenote rule */
-@media (max-width: 1250px){
-  .sidenote .mn-img,
-  .marginnote .mn-img{
-    border-color: color-mix(in oklab, var(--fg) 12%, transparent);
-  }
-}
+
 .sidenote img {
   margin-top: 0.35rem;
   display: block;
@@ -671,26 +628,75 @@ li ol li::before {
 /* Headings offset so anchors don’t hide under the sticky header */
 h2[id], h3[id], h4[id] { scroll-margin-top: 6.5rem; }
 
-/* =========================
-   Mobile / narrow view
-   ========================= */
-@media (max-width: 1250px){
-  #table-of-contents{
-    float: none;
-    position: static;          /* no sticky on small screens */
-    width: auto;
-    margin: 0 0 1rem;
-    padding: .5rem .75rem;
-    border-right: 0;
-    border-left: 3px solid color-mix(in oklab, var(--fg) 12%, transparent);
-    background: color-mix(in oklab, var(--bg) 96%, var(--fg) 4%);
-    border-radius: 4px;
-  }
-}
 #text-table-of-contents a.is-active{
   // font-weight: 700;
   text-decoration: underline;
     background-color: var(--active-toc);
     //border: 1px solid var(--border, #ccc);
  
+}
+
+/*BP STUFF*/
+
+/* theme removal */
+.hidden { display: none !important; }
+
+.bp-x{ right:72px; }
+
+.bp-next,.bp-prev{ right:8px; }
+.bp-prev{ left:8px; }
+
+/* Smooth exit */
+.bp-wrap{ transition: opacity .18s ease; }
+.bp-wrap.bp-fadeout{ opacity: 0; }
+
+/* Respect notches */
+.bp-controls{
+  padding-top: env(safe-area-inset-top, 0);
+  padding-right: calc(env(safe-area-inset-right, 0) + 8px);
+}
+
+
+@media (max-width: 1250px){
+    #preamble.status{
+	padding-right: var(--body-pad);
+    }
+    
+    #content.content{
+	padding-right: var(--body-pad);
+    }
+    .sidenote,
+  .marginnote{
+      float: none;
+      clear: both;
+      width: auto;
+      display: block;
+      margin: 0.5rem 0 0.75rem;
+      padding-left: 0.75rem;
+      border-left: 3px solid rgba(0,0,0,.08);
+      margin-right: 0;
+  }
+    .fullwidth{
+	max-width: calc(100vw - 2 * var(--body-pad));
+    }
+    .sidenote, .marginnote{
+	border-left: 3px solid color-mix(in oklab, var(--fg) 12%, transparent);
+    }
+    .sidenote .mn-img,
+  .marginnote .mn-img{
+      border-color: color-mix(in oklab, var(--fg) 12%, transparent);
+  }
+   
+  #table-of-contents{
+      float: none;
+      position: static;
+      width: auto;
+      margin: 0 0 1rem;
+      padding: .5rem .75rem;
+      border-right: 0;
+      border-left: 3px solid color-mix(in oklab, var(--fg) 12%, transparent);
+      background: color-mix(in oklab, var(--bg) 96%, var(--fg) 4%);
+      border-radius: 4px;
+  }
+
 }
