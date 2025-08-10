@@ -3,11 +3,17 @@
    ========================= */
 :root{
     /* Layout */
-    --content: 880px;
+    
     --gutter:  2rem;
     --margin:  420px;
-    --body-pad: 1rem; 
-
+    --body-pad: 1rem;
+    --content: clamp(
+	var(--content-min),
+	calc(100vi - 2*var(--body-pad) - 2*(var(--margin) + var(--gutter))),
+	var(--content-max)
+    );
+    --content-min: 60ch;
+    --content-max: 880px;
     /* Fullwidth media tuning */
     --bleed: 48px; 
     --fullwidth-cap: 860px;
@@ -91,7 +97,7 @@ nav{
     max-width: 100%;
 }
 
-@media (max-width: 1100px){
+@media (max-width: 1250px){
     #preamble.status{
       padding-right: var(--body-pad);
   }
@@ -139,8 +145,9 @@ footer{
 .marginnote{
     float: right;
     width: var(--margin);
-    margin-right: calc(-1 * ( (95vw - var(--content)) / 2 ));
-    padding-left: var(--gutter);
+    //margin-right: calc(-1 * ( (95vw - var(--content)) / 2 ));
+    margin-right: calc(-1 * ((100vi - var(--content)) / 2));
+    padding-right: var(--gutter);
     overflow-wrap: break-word;    /* preferred */
     word-wrap: break-word;        /* legacy support */
     word-break: break-word;       /* safety for stubborn cases */
@@ -207,7 +214,7 @@ body{ counter-reset: sidenote-counter; }
     text-align: center; font-size: .95rem; color: #666; margin-top: .4rem;
 }
 
-@media (max-width: 1100px){
+@media (max-width: 1250px){
   #content.content{
     padding-right: var(--body-pad);
   }
@@ -506,7 +513,7 @@ li ol li::before {
 .epigraph blockquote footer{ color: var(--muted); }
 
 /* Mobile sidenote rule uses a light border; make it theme-aware */
-@media (max-width: 1100px){
+@media (max-width: 1250px){
   .sidenote, .marginnote{
     border-left: 3px solid color-mix(in oklab, var(--fg) 12%, transparent);
   }
@@ -577,7 +584,7 @@ li ol li::before {
 
 /* Mobile: these already stack under content via your media query; nothing special needed,
    but we can soften the border a touch to match the mobile sidenote rule */
-@media (max-width: 1100px){
+@media (max-width: 1250px){
   .sidenote .mn-img,
   .marginnote .mn-img{
     border-color: color-mix(in oklab, var(--fg) 12%, transparent);
@@ -600,8 +607,9 @@ li ol li::before {
   /* push into the left gutter, mirroring .sidenote on the right */
   float: left;
   width: var(--margin);
-  margin-left: calc(-1 * ( (95vw - var(--content)) / 2 ));
-  padding-right: var(--gutter);
+  //margin-left: calc(-1 * ( (95vw - var(--content)) / 2 ));
+  margin-left: calc(-1 * ((100vi - var(--content)) / 2));
+  padding-left: var(--gutter);
   box-sizing: border-box;
 
   /* sticky behavior */
@@ -648,7 +656,7 @@ h2[id], h3[id], h4[id] { scroll-margin-top: 6.5rem; }
 /* =========================
    Mobile / narrow view
    ========================= */
-@media (max-width: 1100px){
+@media (max-width: 1250px){
   #table-of-contents{
     float: none;
     position: static;          /* no sticky on small screens */

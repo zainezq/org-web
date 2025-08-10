@@ -14,8 +14,8 @@
   - [[file:blogs/blogs-list.org][Blogs List]]
 - tags
   - [[file:tags/introduction.org][Tag: introduction]]
-  - [[file:tags/emacs.org][Tag: emacs]]
-  - [[file:tags/education.org][Tag: education]]
-  - [[file:tags/website.org][Tag: website]]
-  - [[file:tags/review.org][Tag: review]]
   - [[file:tags/insights.org][Tag: insights]]
+  - [[file:tags/emacs.org][Tag: emacs]]
+  - [[file:tags/website.org][Tag: website]]
+  - [[file:tags/education.org][Tag: education]]
+  - [[file:tags/review.org][Tag: review]]
