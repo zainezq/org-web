@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-08-12 Tue 18:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Clean Code: Chapter 3 Notes</title>
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+
+<link rel="stylesheet" href="/assets/styles/style.css" />
+<link rel="stylesheet" href="/assets/styles/bigger-picture.min.css" />
+
+<script src="/assets/scripts/script.js" defer></script> 
+<script src="/assets/scripts/bigger-picture.min.js" defer></script>
+<script src="/assets/scripts/svg-pan-zoom.min.js" defer></script>
+<script src="/assets/scripts/gallery-init.js" defer></script>
+</head>
+<body>
+<div id="preamble" class="status">
+
+<div class="banner-header">
+  <a href="/"> <img src="/assets/images/gr.png" alt="Site Logo" class="banner-logo" /> </a>
+  <nav>
+    <a href="/">Home | </a>
+    <a href="/posts/posts-list.html">Posts | </a>
+    <a href="/blogs/blogs-list.html">Blogs | </a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">🌗 Theme</button>
+  </div>
+  <div id="updated">Updated: 2025-08-12 Tue 18:30</div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Clean Code: Chapter 3 Notes</h1>
+<div class="filetags"><a href="/categories.html"> <span class="post-tag">books</span> </a> <a href="/categories.html"> <span class="post-tag">notes</span> </a></div>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgcc7c0df">Chapter 3: Functions</a>
+<ul>
+<li><a href="#orgb1c33f6">Functions should be small</a></li>
+<li><a href="#orgeb7fdc2">Do One Thing &amp; One Level of Abstraction</a></li>
+<li><a href="#orgae64f24">Switch Statements</a></li>
+<li><a href="#org1e917e3">Use Descriptive Names</a></li>
+<li><a href="#orgb286a39">Function Arguments</a></li>
+<li><a href="#org451c921">Have No Side Effects</a></li>
+<li><a href="#orgb9a0da6">Error Handling</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+Link to <a href="clean-code-chapter-2.html">Chapter 2</a>
+</p>
+<div id="outline-container-orgcc7c0df" class="outline-2">
+<h2 id="orgcc7c0df">Chapter 3: Functions</h2>
+<div class="outline-text-2" id="text-orgcc7c0df">
+</div>
+<div id="outline-container-orgb1c33f6" class="outline-3">
+<h3 id="orgb1c33f6">Functions should be small</h3>
+<div class="outline-text-3" id="text-orgb1c33f6">
+<p>
+Functions should be extremely short—ideally just a few lines, so they remain easy to understand and maintain.
+</p>
+
+<p>
+Avoid deeply nested blocks; keep indentation shallow (1–2 levels), often replacing blocks with descriptive function calls.
+</p>
+
+<p>
+A small function tells a concise, self-contained story, making it easier for readers to follow the program’s intent.
+</p>
+
+<p>
+The smaller the function, the more descriptive and accurate its name can be, improving self-documentation.
+</p>
+
+<p>
+Large functions hide complexity and mix abstraction levels, making errors and duplication more likely.
+</p>
+</div>
+</div>
+<div id="outline-container-orgeb7fdc2" class="outline-3">
+<h3 id="orgeb7fdc2">Do One Thing &amp; One Level of Abstraction</h3>
+<div class="outline-text-3" id="text-orgeb7fdc2">
+<p>
+A function should do exactly one conceptual task, and all its statements should exist at the same abstraction level.
+</p>
+
+<p>
+Mixing details (like string concatenation) with high-level actions (like rendering a page) causes confusion.
+</p>
+
+<p>
+The Stepdown Rule: organise functions so they read like a top down narrative, each calling the next abstraction level.
+</p>
+
+<p>
+If you can extract a subfunction with a name that isn’t a restatement, the original function is doing too much.
+</p>
+
+<p>
+Functions that “do one thing” cannot be logically split into sections such as “initialize,” “process,” “finalize.”
+</p>
+</div>
+</div>
+<div id="outline-container-orgae64f24" class="outline-3">
+<h3 id="orgae64f24">Switch Statements</h3>
+<div class="outline-text-3" id="text-orgae64f24">
+<p>
+Switch statements naturally violate “do one thing” by handling multiple cases; they also grow in size over time.
+</p>
+
+<p>
+They break the Single Responsibility Principle (multiple reasons to change) and Open-Closed Principle (must change for new cases).
+</p>
+
+<p>
+Preferred approach: hide switch statements inside a factory and dispatch behavior polymorphically through an interface.
+</p>
+
+<p>
+Allow only one visible switch in your system, used solely for object creation, then encapsulate it.
+</p>
+
+<p>
+This removes duplication and keeps high-level code unaware of concrete type distinctions.
+</p>
+
+<p>
+Example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span class="org-keyword">public</span> <span class="org-keyword">abstract</span> <span class="org-keyword">class</span> <span class="org-type">Employee</span> {
+    <span class="org-keyword">public</span> <span class="org-keyword">abstract</span> <span class="org-type">boolean</span> <span class="org-function-name">isPayday</span>();
+    <span class="org-keyword">public</span> <span class="org-keyword">abstract</span> <span class="org-type">Money</span> <span class="org-function-name">calculatePay</span>();
+    <span class="org-keyword">public</span> <span class="org-keyword">abstract</span> <span class="org-type">void</span> <span class="org-function-name">deliverPay</span>(<span class="org-type">Money</span> <span class="org-variable-name">pay</span>);
+}
+-----------------
+    <span class="org-keyword">public</span> <span class="org-keyword">interface</span> EmployeeFactory {
+        <span class="org-keyword">public</span> <span class="org-type">Employee</span> <span class="org-function-name">makeEmployee</span>(<span class="org-type">EmployeeRecord</span> <span class="org-variable-name">r</span>) <span class="org-keyword">throws</span> <span class="org-type">InvalidEmployeeType</span>;
+    }
+-----------------
+    <span class="org-keyword">public</span> <span class="org-keyword">class</span> EmployeeFactoryImpl <span class="org-keyword">implements</span> <span class="org-type">EmployeeFactory</span> {
+        <span class="org-keyword">public</span> <span class="org-type">Employee</span> <span class="org-function-name">makeEmployee</span>(<span class="org-type">EmployeeRecord</span> <span class="org-variable-name">r</span>) <span class="org-keyword">throws</span> <span class="org-type">InvalidEmployeeType</span> {
+            <span class="org-keyword">switch</span> (r.type) {
+            <span class="org-keyword">case</span> COMMISSIONED:
+                <span class="org-keyword">return</span> <span class="org-keyword">new</span> <span class="org-type">CommissionedEmployee</span>(r) ;
+            <span class="org-keyword">case</span> HOURLY:
+                <span class="org-keyword">return</span> <span class="org-keyword">new</span> <span class="org-type">HourlyEmployee</span>(r);
+            <span class="org-keyword">case</span> SALARIED:
+                <span class="org-keyword">return</span> <span class="org-keyword">new</span> <span class="org-type">SalariedEmploye</span>(r);
+            <span class="org-keyword">default</span>:
+                <span class="org-keyword">throw</span> <span class="org-keyword">new</span> <span class="org-type">InvalidEmployeeType</span>(r.type);
+            }
+        }
+    }
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1e917e3" class="outline-3">
+<h3 id="org1e917e3">Use Descriptive Names</h3>
+<div class="outline-text-3" id="text-org1e917e3">
+<p>
+A function’s name should clearly state its purpose. Long, descriptive names beat short, cryptic ones.
+</p>
+
+<p>
+Consistent naming patterns (shared verbs/nouns) help code read like a coherent story and aid predictability.
+</p>
+
+<p>
+Descriptive names reduce the need for comments and improve comprehension without external documentation.
+</p>
+
+<p>
+Renaming functions can reveal design improvements, so try multiple options until the best emerges.
+</p>
+
+<p>
+IDE refactoring tools make renaming safe, encouraging experimentation.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb286a39" class="outline-3">
+<h3 id="orgb286a39">Function Arguments</h3>
+<div class="outline-text-3" id="text-orgb286a39">
+<p>
+<div class="epigraph"><blockquote>The ideal number of arguments for a function is zero (niladic). Next comes one (monadic), followed closely by two (dyadic). Three arguments (triadic) should be avoided where possible. More than three (polyadic) requires very special justification—and then shouldn’t be used anyway.</blockquote></div>
+</p>
+
+<p>
+Fewer arguments = better; aim for 0–2, avoid more than 3 unless absolutely necessary.
+</p>
+
+<p>
+Flag arguments (booleans) are a red flag—they imply the function does multiple things.
+</p>
+
+<p>
+Group related parameters into objects (e.g., <code>Point</code> for <code>x</code> and <code>y</code>) to reduce argument count and improve clarity.
+</p>
+
+<p>
+Output arguments are confusing—prefer returning values or mutating the owning object’s state.
+</p>
+
+<p>
+Match function/argument names in verb–noun or keyword style (e.g., <code>writeField(name)</code>, <code>assertExpectedEqualsActual</code>).
+</p>
+</div>
+</div>
+<div id="outline-container-org451c921" class="outline-3">
+<h3 id="org451c921">Have No Side Effects</h3>
+<div class="outline-text-3" id="text-org451c921">
+<p>
+A function should do only what its name promises. Hidden state changes are misleading and dangerous.
+</p>
+
+<p>
+Side effects create temporal coupling, meaning the function must be called in a certain sequence to be safe.
+</p>
+
+<p>
+If unavoidable, make side effects explicit in the name (e.g., <code>checkPasswordAndInitializeSession</code>).
+</p>
+
+<p>
+Clear separation of command and query functions avoids ambiguity in meaning and intent.
+</p>
+
+<p>
+Functions that modify state and return information often cause confusion and should be split.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb9a0da6" class="outline-3">
+<h3 id="orgb9a0da6">Error Handling</h3>
+<div class="outline-text-3" id="text-orgb9a0da6">
+<p>
+Error handling is a single responsibility—separate it from normal logic to keep both paths clear.
+</p>
+
+<p>
+Prefer exceptions over error codes to avoid cluttering the happy path and to reduce dependency magnets.
+</p>
+
+<p>
+Extract try/catch bodies into their own functions for cleaner structure.
+</p>
+
+<p>
+See below:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java">
+<span class="org-keyword">public</span> <span class="org-type">void</span> <span class="org-function-name">delete</span>(<span class="org-type">Page</span> <span class="org-variable-name">page</span>) {
+      <span class="org-keyword">try</span> {
+        deletePageAndAllReferences(page);
+      }
+      <span class="org-keyword">catch</span> (Exception e) {
+        logError(e);
+      }
+  }
+
+<span class="org-keyword">private</span> <span class="org-type">void</span> <span class="org-function-name">deletePageAndAllReferences</span>(<span class="org-type">Page</span> <span class="org-variable-name">page</span>) <span class="org-keyword">throws</span> <span class="org-type">Exception</span> {
+    deletePage(page);
+    registry.deleteReference(page.name);
+    configKeys.deleteKey(page.name.makeKey());
+}
+<span class="org-keyword">private</span> <span class="org-type">void</span> <span class="org-function-name">logError</span>(<span class="org-type">Exception</span> <span class="org-variable-name">e</span>) {
+    logger.log(e.getMessage());
+}
+
+</pre>
+</div>
+
+<p>
+Keep functions small enough that occasional multiple return or break statements are acceptable.
+</p>
+
+<p>
+Avoid duplication in error handling, and follow the DRY principle to ensure changes occur in one place.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer>
+<div class="copyright-container">
+<div class="copyright">
+Copyright &copy; 2022-2025 Zaine Qayyum. All rights reserved unless otherwise noted.</div></div>
+<div class="generated">
+Created with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.1 (<a href="https://orgmode.org">Org</a> mode 9.7.11) on <a href="https://www.archlinux.org/">Arch</a> <a href="https://www.gnu.org">GNU</a>/<a href="https://www.kernel.org/">Linux</a>
+</div>
+</footer>
+</div>
+</body>
+</html>
