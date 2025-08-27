@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-08-27 Wed 21:14 -->
+<!-- 2025-08-27 Wed 20:20 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Clean Code: Chapter 2 Notes</title>
@@ -224,22 +224,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org581bdc3">Chapter 2: Meaningful Names</a>
+<li><a href="#org426a50c">Chapter 2: Meaningful Names</a>
 <ul>
-<li><a href="#orgc763196">Use intention revealing names:</a></li>
-<li><a href="#orgdecf450">Avoid disinformation</a></li>
-<li><a href="#org8474847">Make Meaningful Distinctions</a></li>
-<li><a href="#orgbbbe06c">Use Pronouncable Names</a></li>
-<li><a href="#org3f0a8e5">Use Searchable Names</a></li>
-<li><a href="#orgc12ee54">Avoid Encodings</a></li>
-<li><a href="#org90ee7a9">Avoid Mental Mappings</a></li>
-<li><a href="#orga124cfc">Class Names</a></li>
-<li><a href="#orgf988299">Method Names</a></li>
-<li><a href="#org12bfea9">Don't be cute/Don't use puns</a></li>
-<li><a href="#orga33a68e">Pick one word per concept</a></li>
-<li><a href="#org6fddbc9">Solution Domain Names and Problem Domain Names</a></li>
-<li><a href="#orge603c17">Add Meaningful Context</a></li>
-<li><a href="#org2fc0448">Don't add gratuitous context</a></li>
+<li><a href="#org4854d7d">Use intention revealing names:</a></li>
+<li><a href="#org58ad477">Avoid disinformation</a></li>
+<li><a href="#org98ec227">Make Meaningful Distinctions</a></li>
+<li><a href="#org0b08884">Use Pronouncable Names</a></li>
+<li><a href="#org998d894">Use Searchable Names</a></li>
+<li><a href="#org9e858c1">Avoid Encodings</a></li>
+<li><a href="#org0d6ee9d">Avoid Mental Mappings</a></li>
+<li><a href="#org65abaa3">Class Names</a></li>
+<li><a href="#org6b68355">Method Names</a></li>
+<li><a href="#org05ca717">Don't be cute/Don't use puns</a></li>
+<li><a href="#org22e1ceb">Pick one word per concept</a></li>
+<li><a href="#orgdbb2bab">Solution Domain Names and Problem Domain Names</a></li>
+<li><a href="#orgf92c16a">Add Meaningful Context</a></li>
+<li><a href="#org070e01d">Don't add gratuitous context</a></li>
 </ul>
 </li>
 </ul>
@@ -249,13 +249,13 @@
 Link to <a href="clean-code-chapter-1.html">Chapter 1</a>
 Link to <a href="clean-code-chapter-3.html">Chapter 3</a>
 </p>
-<div id="outline-container-org581bdc3" class="outline-2">
-<h2 id="org581bdc3">Chapter 2: Meaningful Names</h2>
-<div class="outline-text-2" id="text-org581bdc3">
+<div id="outline-container-org426a50c" class="outline-2">
+<h2 id="org426a50c">Chapter 2: Meaningful Names</h2>
+<div class="outline-text-2" id="text-org426a50c">
 </div>
-<div id="outline-container-orgc763196" class="outline-3">
-<h3 id="orgc763196">Use intention revealing names:</h3>
-<div class="outline-text-3" id="text-orgc763196">
+<div id="outline-container-org4854d7d" class="outline-3">
+<h3 id="org4854d7d">Use intention revealing names:</h3>
+<div class="outline-text-3" id="text-org4854d7d">
 <p>
 Names should reveal intent, there is no revelation in naming an integer <code>d</code>, intending it stands for days. Instead, you should use the following names:
 </p>
@@ -268,17 +268,17 @@ Names should reveal intent, there is no revelation in naming an integer <code>d<
 </div>
 </div>
 </div>
-<div id="outline-container-orgdecf450" class="outline-3">
-<h3 id="orgdecf450">Avoid disinformation</h3>
-<div class="outline-text-3" id="text-orgdecf450">
+<div id="outline-container-org58ad477" class="outline-3">
+<h3 id="org58ad477">Avoid disinformation</h3>
+<div class="outline-text-3" id="text-org58ad477">
 <p>
 Don't postfix the word 'list' to the name 'accounts' unless it's actually a list. This is because the reader will <i>assume</i> the data type of accountsList is indeed a list, instead choose a name like <code>accountsGroup</code>.
 </p>
 </div>
 </div>
-<div id="outline-container-org8474847" class="outline-3">
-<h3 id="org8474847">Make Meaningful Distinctions</h3>
-<div class="outline-text-3" id="text-org8474847">
+<div id="outline-container-org98ec227" class="outline-3">
+<h3 id="org98ec227">Make Meaningful Distinctions</h3>
+<div class="outline-text-3" id="text-org98ec227">
 <p>
 While it is possible to name by being disinformative, it is also possible to name being non informative. Consider:
 </p>
@@ -303,18 +303,18 @@ Furthermore, noise words are redundant. We should never use the word <code>varia
 </p>
 </div>
 </div>
-<div id="outline-container-orgbbbe06c" class="outline-3">
-<h3 id="orgbbbe06c">Use Pronouncable Names</h3>
-<div class="outline-text-3" id="text-orgbbbe06c">
+<div id="outline-container-org0b08884" class="outline-3">
+<h3 id="org0b08884">Use Pronouncable Names</h3>
+<div class="outline-text-3" id="text-org0b08884">
 <p>
 This is quite straightforward. Do not use a name like <code>genymdhms</code> to refer to generation date, year, month, day, hour, minute,
 and second. Instead use <code>generationTimeStamp</code>.
 </p>
 </div>
 </div>
-<div id="outline-container-org3f0a8e5" class="outline-3">
-<h3 id="org3f0a8e5">Use Searchable Names</h3>
-<div class="outline-text-3" id="text-org3f0a8e5">
+<div id="outline-container-org998d894" class="outline-3">
+<h3 id="org998d894">Use Searchable Names</h3>
+<div class="outline-text-3" id="text-org998d894">
 <p>
 In modern IDE's, it is still quite difficult to search for single-lettered variables. The writer states a personal preference of using single-letter names only as local variables and inside short methods. The following principle is given:
 </p>
@@ -324,42 +324,42 @@ In modern IDE's, it is still quite difficult to search for single-lettered varia
 </p>
 </div>
 </div>
-<div id="outline-container-orgc12ee54" class="outline-3">
-<h3 id="orgc12ee54">Avoid Encodings</h3>
-<div class="outline-text-3" id="text-orgc12ee54">
+<div id="outline-container-org9e858c1" class="outline-3">
+<h3 id="org9e858c1">Avoid Encodings</h3>
+<div class="outline-text-3" id="text-org9e858c1">
 <p>
 Don't prefix variables with letters like m_ as was done in the past. Do not type encode as well, an example of this is: <code>PhoneNumber phoneString;</code> we can see the reader being misled into thinking the phone number is a String.
 </p>
 </div>
 </div>
-<div id="outline-container-org90ee7a9" class="outline-3">
-<h3 id="org90ee7a9">Avoid Mental Mappings</h3>
-<div class="outline-text-3" id="text-org90ee7a9">
+<div id="outline-container-org0d6ee9d" class="outline-3">
+<h3 id="org0d6ee9d">Avoid Mental Mappings</h3>
+<div class="outline-text-3" id="text-org0d6ee9d">
 <p>
 Clarity is king, don't use a name for a variable that only you know what it stands for. For example: using the letter r as the lower-cased version of the url with the host and scheme
 removed. That's being smart, not professional.
 </p>
 </div>
 </div>
-<div id="outline-container-orga124cfc" class="outline-3">
-<h3 id="orga124cfc">Class Names</h3>
-<div class="outline-text-3" id="text-orga124cfc">
+<div id="outline-container-org65abaa3" class="outline-3">
+<h3 id="org65abaa3">Class Names</h3>
+<div class="outline-text-3" id="text-org65abaa3">
 <p>
 <div class="epigraph"><blockquote>Classes and objects should have noun or noun phrase names like Customer, WikiPage, Account, and AddressParser. Avoid words like Manager, Processor, Data, or Info in the name of a class. A class name should not be a verb</blockquote></div>
 </p>
 </div>
 </div>
-<div id="outline-container-orgf988299" class="outline-3">
-<h3 id="orgf988299">Method Names</h3>
-<div class="outline-text-3" id="text-orgf988299">
+<div id="outline-container-org6b68355" class="outline-3">
+<h3 id="org6b68355">Method Names</h3>
+<div class="outline-text-3" id="text-org6b68355">
 <p>
 Methods should have verb or verb phrase names. 
 </p>
 </div>
 </div>
-<div id="outline-container-org12bfea9" class="outline-3">
-<h3 id="org12bfea9">Don't be cute/Don't use puns</h3>
-<div class="outline-text-3" id="text-org12bfea9">
+<div id="outline-container-org05ca717" class="outline-3">
+<h3 id="org05ca717">Don't be cute/Don't use puns</h3>
+<div class="outline-text-3" id="text-org05ca717">
 <p>
 Do not use names that are only understandable to people whom you share jokes etc with. Furthermore, do not use colloquialism and slang in names.
 </p>
@@ -369,17 +369,17 @@ Do not use names that are only understandable to people whom you share jokes etc
 </ul>
 </div>
 </div>
-<div id="outline-container-orga33a68e" class="outline-3">
-<h3 id="orga33a68e">Pick one word per concept</h3>
-<div class="outline-text-3" id="text-orga33a68e">
+<div id="outline-container-org22e1ceb" class="outline-3">
+<h3 id="org22e1ceb">Pick one word per concept</h3>
+<div class="outline-text-3" id="text-org22e1ceb">
 <p>
 If you have multiple choices for naming a concept, use one and stick with it. For instance if your options are fetch, get and retrieve, use one and stick with it throughout.
 </p>
 </div>
 </div>
-<div id="outline-container-org6fddbc9" class="outline-3">
-<h3 id="org6fddbc9">Solution Domain Names and Problem Domain Names</h3>
-<div class="outline-text-3" id="text-org6fddbc9">
+<div id="outline-container-orgdbb2bab" class="outline-3">
+<h3 id="orgdbb2bab">Solution Domain Names and Problem Domain Names</h3>
+<div class="outline-text-3" id="text-orgdbb2bab">
 <p>
 Where possible use solution domain names, as the people that are going to be reading the code are programmers. Therefore, do not shy away from using CS terms, algorithm names, math names and so forth.
 </p>
@@ -389,17 +389,17 @@ However when it is not possible to use solution domain names (in other words, wh
 </p>
 </div>
 </div>
-<div id="outline-container-orge603c17" class="outline-3">
-<h3 id="orge603c17">Add Meaningful Context</h3>
-<div class="outline-text-3" id="text-orge603c17">
+<div id="outline-container-orgf92c16a" class="outline-3">
+<h3 id="orgf92c16a">Add Meaningful Context</h3>
+<div class="outline-text-3" id="text-orgf92c16a">
 <p>
 Enclose names with well-named classes, functions, or namespaces. When all else fails, then prefix with something that provides more context.
 </p>
 </div>
 </div>
-<div id="outline-container-org2fc0448" class="outline-3">
-<h3 id="org2fc0448">Don't add gratuitous context</h3>
-<div class="outline-text-3" id="text-org2fc0448">
+<div id="outline-container-org070e01d" class="outline-3">
+<h3 id="org070e01d">Don't add gratuitous context</h3>
+<div class="outline-text-3" id="text-org070e01d">
 <p>
 Shorter names are better than longer ones, generally. This is so long as the context and intent is clear. Don't add redundant or irrelevant additions to the name in the for the sake of 'context'.
 </p>
