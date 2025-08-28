@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-08-28 Thu 17:03 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Clean Code: Chapter 4 Notes</title>
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+
+<link rel="stylesheet" href="/assets/styles/style.css" />
+<link rel="stylesheet" href="/assets/styles/bigger-picture.min.css" />
+
+<script src="/assets/scripts/script.js" defer></script> 
+<script src="/assets/scripts/bigger-picture.min.js" defer></script>
+<script src="/assets/scripts/svg-pan-zoom.min.js" defer></script>
+<script src="/assets/scripts/gallery-init.js" defer></script>
+</head>
+<body>
+<div id="preamble" class="status">
+
+<div class="banner-header">
+  <a href="/"> <img src="/assets/images/gr.png" alt="Site Logo" class="banner-logo" /> </a>
+  <nav>
+    <a href="/">Home | </a>
+    <a href="/posts/posts-list.html">Posts | </a>
+    <a href="/blogs/blogs-list.html">Blogs | </a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">🌗 Theme</button>
+  </div>
+  <div id="updated">Updated: 2025-08-28 Thu 16:52</div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Clean Code: Chapter 4 Notes</h1>
+<div class="filetags"><a href="/categories.html"> <span class="post-tag">books</span> </a> <a href="/categories.html"> <span class="post-tag">notes</span> </a></div>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org654cde4">Chapter 4: Comments</a>
+<ul>
+<li><a href="#orga48d099">Comments Do Not Make Up for Bad Code</a></li>
+<li><a href="#org8a9af22">Good Comments</a>
+<ul>
+<li><a href="#orga00e43a">Legal Comments</a></li>
+<li><a href="#org5d052d2">Informative Comments</a></li>
+<li><a href="#orgc07d869">Explanation of Intent</a></li>
+<li><a href="#orgeac0874">Clarification</a></li>
+<li><a href="#org925a6b4">Warning of Consequences</a></li>
+<li><a href="#org3c48674"><span class="todo TODO">TODO</span> Comments</a></li>
+<li><a href="#org40776a2">Amplification</a></li>
+<li><a href="#orga01f4c8">Javadocs in Public APIs</a></li>
+</ul>
+</li>
+<li><a href="#orgdf9d0a0">Bad Comments</a>
+<ul>
+<li><a href="#org513ee74">Don’t Use a Comment When You Can Use a Function or Variable</a></li>
+<li><a href="#org47d711f">Position Markers</a></li>
+<li><a href="#org166362e">Closing Brace Comments</a></li>
+<li><a href="#orga7d0949">Attributions and Bylines</a></li>
+<li><a href="#org087890b">Commented Out Code</a></li>
+<li><a href="#org2707e8f">HTML Comments</a></li>
+<li><a href="#orgd3ef1af">Nonlocal Information</a></li>
+<li><a href="#org6859e2c">Too Much Information</a></li>
+<li><a href="#orgd7d19c8">Inobvious Connection</a></li>
+<li><a href="#org24f323a">Function Headers</a></li>
+<li><a href="#orgd626f64">Javadocs in Nonpublic Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+Link to <a href="clean-code-chapter-3.html">Chapter 3</a> | Link to <a href="clean-code-chapter-5.html">Chapter 5</a>
+</p>
+<div id="outline-container-org654cde4" class="outline-2">
+<h2 id="org654cde4">Chapter 4: Comments</h2>
+<div class="outline-text-2" id="text-org654cde4">
+<p>
+Comments are a necessary evil—they exist because code fails to express intent clearly.
+</p>
+
+<p>
+Outdated comments are dangerous; they can mislead more than help.
+</p>
+
+<p>
+Strive to write code that explains itself; comments should be minimised.
+</p>
+
+<p>
+Truth is always in the code, not in the comments.
+</p>
+</div>
+<div id="outline-container-orga48d099" class="outline-3">
+<h3 id="orga48d099">Comments Do Not Make Up for Bad Code</h3>
+<div class="outline-text-3" id="text-orga48d099">
+<p>
+Don’t use comments to excuse messy, unclear code. Clean the code instead.
+</p>
+
+<p>
+Clear, expressive code with few comments &gt; cluttered code with many comments.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java">
+<span class="org-comment-delimiter">// </span><span class="org-comment">Check to see if the employee is eligible for full benefits
+</span><span class="org-keyword">if</span> ((employee.flags &amp; HOURLY_FLAG) &amp;&amp; (employee.age &gt; 65))
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Better:
+</span><span class="org-keyword">if</span> (employee.isEligibleForFullBenefits())
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8a9af22" class="outline-3">
+<h3 id="org8a9af22">Good Comments</h3>
+<div class="outline-text-3" id="text-org8a9af22">
+<p>
+Only write them when unavoidable. Such as in the following instances:
+</p>
+</div>
+<div id="outline-container-orga00e43a" class="outline-4">
+<h4 id="orga00e43a">Legal Comments</h4>
+<div class="outline-text-4" id="text-orga00e43a">
+<p>
+Sometimes required for copyright/licensing.
+</p>
+
+<p>
+Keep them short; refer to standard licenses rather than embedding full legal text.
+</p>
+</div>
+</div>
+<div id="outline-container-org5d052d2" class="outline-4">
+<h4 id="org5d052d2">Informative Comments</h4>
+<div class="outline-text-4" id="text-org5d052d2">
+<p>
+Explain return values, formats, or patterns.
+</p>
+
+<p>
+Prefer naming/structuring code to make such comments unnecessary.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java">
+<span class="org-comment-delimiter">// </span><span class="org-comment">format matched kk:mm:ss EEE, MMM dd, yyyy
+</span><span class="org-type">Pattern</span> <span class="org-variable-name">timeMatcher</span> = Pattern.compile(<span class="org-string">"\\d*:\\d*:\\d* \\w*, \\w* \\d*, \\d*"</span>);
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc07d869" class="outline-4">
+<h4 id="orgc07d869">Explanation of Intent</h4>
+<div class="outline-text-4" id="text-orgc07d869">
+<p>
+Describe why a certain approach was chosen.
+</p>
+
+<p>
+Helps future maintainers understand reasoning behind code.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java">
+<span class="org-keyword">public</span> <span class="org-type">int</span> <span class="org-function-name">compareTo</span>(<span class="org-type">Object</span> <span class="org-variable-name">o</span>)
+{
+    <span class="org-keyword">if</span>(o <span class="org-keyword">instanceof</span> WikiPagePath)
+        { <span class="org-type">WikiPagePath</span> <span class="org-variable-name">p</span> = (<span class="org-type">WikiPagePath</span>) o;
+            <span class="org-type">String</span> <span class="org-variable-name">compressedName</span> = StringUtil.join(names, <span class="org-string">""</span>);
+            <span class="org-type">String</span> <span class="org-variable-name">compressedArgumentName</span> = StringUtil.join(p.names, <span class="org-string">""</span>);
+            <span class="org-keyword">return</span> compressedName.compareTo(compressedArgumentName);
+        }
+    <span class="org-keyword">return</span> 1; <span class="org-comment-delimiter">// </span><span class="org-comment">we are greater because we are the right type.
+</span>}
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgeac0874" class="outline-4">
+<h4 id="orgeac0874">Clarification</h4>
+<div class="outline-text-4" id="text-orgeac0874">
+<p>
+Translate obscure values into readable terms.
+</p>
+
+<p>
+Useful when working with unchangeable APIs/libraries, but risky if incorrect.
+</p>
+</div>
+</div>
+<div id="outline-container-org925a6b4" class="outline-4">
+<h4 id="org925a6b4">Warning of Consequences</h4>
+<div class="outline-text-4" id="text-org925a6b4">
+<p>
+Alert others about performance, thread-safety, or side effects.
+</p>
+
+<p>
+For example, in code you can say:
+</p>
+
+<p>
+<code>// SimpleDateFormat is not thread safe, so create each instance independently.</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org3c48674" class="outline-4">
+<h4 id="org3c48674"><span class="todo TODO">TODO</span> Comments</h4>
+<div class="outline-text-4" id="text-org3c48674">
+<p>
+Mark incomplete work or planned improvements.
+</p>
+
+<p>
+Should be reviewed regularly; not an excuse for bad code.
+</p>
+</div>
+</div>
+<div id="outline-container-org40776a2" class="outline-4">
+<h4 id="org40776a2">Amplification</h4>
+<div class="outline-text-4" id="text-org40776a2">
+<p>
+Highlight the importance of seemingly small details.
+</p>
+
+<p>
+<code>// the trim is real important. It removes starting spaces...</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orga01f4c8" class="outline-4">
+<h4 id="orga01f4c8">Javadocs in Public APIs</h4>
+<div class="outline-text-4" id="text-orga01f4c8">
+<p>
+Public APIs should have clear documentation.
+</p>
+
+<p>
+Javadocs can also mislead. Keep them accurate and up-to-date.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdf9d0a0" class="outline-3">
+<h3 id="orgdf9d0a0">Bad Comments</h3>
+<div class="outline-text-3" id="text-orgdf9d0a0">
+<ul class="org-ul">
+<li>Don't place a comment just because you feel like it.</li>
+<li>Remove redundant comments.</li>
+<li>Avoid misleading comments.</li>
+<li>Don't mandate everything (not every function needs a Javadoc).</li>
+<li>No need for journal comments, we have source control.</li>
+<li>Remove noise comments.</li>
+</ul>
+</div>
+<div id="outline-container-org513ee74" class="outline-4">
+<h4 id="org513ee74">Don’t Use a Comment When You Can Use a Function or Variable</h4>
+<div class="outline-text-4" id="text-org513ee74">
+<p>
+Replace explanatory comments with expressive variable or function names.
+</p>
+
+<p>
+Refactor code to remove comment redundancy.
+</p>
+</div>
+</div>
+<div id="outline-container-org47d711f" class="outline-4">
+<h4 id="org47d711f">Position Markers</h4>
+<div class="outline-text-4" id="text-org47d711f">
+<p>
+Avoid decorative banners like <code>// Actions ///////////////////////</code>, they add clutter.
+</p>
+
+<p>
+Use sparingly and only for meaningful grouping.
+</p>
+
+<p>
+Overuse makes them blend into background noise.
+</p>
+</div>
+</div>
+<div id="outline-container-org166362e" class="outline-4">
+<h4 id="org166362e">Closing Brace Comments</h4>
+<div class="outline-text-4" id="text-org166362e">
+<p>
+Comments on closing braces (} // while) are unnecessary for small, well structured functions.
+</p>
+
+<p>
+Prefer short, clear functions over brace markers.
+</p>
+</div>
+</div>
+<div id="outline-container-orga7d0949" class="outline-4">
+<h4 id="orga7d0949">Attributions and Bylines</h4>
+<div class="outline-text-4" id="text-orga7d0949">
+<p>
+Don’t add personal tags like <code>/* Added by Rick */</code>, use version control for authorship history.
+</p>
+
+<p>
+Such comments become outdated and irrelevant over time.
+</p>
+</div>
+</div>
+<div id="outline-container-org087890b" class="outline-4">
+<h4 id="org087890b">Commented Out Code</h4>
+<div class="outline-text-4" id="text-org087890b">
+<p>
+Never keep old code commented out; delete it and rely on version control history.
+</p>
+
+<p>
+Commented-out code adds clutter and confuses future maintainers.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java">
+<span class="org-comment-delimiter">// </span><span class="org-comment">Old cruft that should be deleted:
+</span><span class="org-comment-delimiter">//</span><span class="org-comment">hdrPos = bytePos;
+</span><span class="org-comment-delimiter">//</span><span class="org-comment">dataPos = bytePos;
+</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2707e8f" class="outline-4">
+<h4 id="org2707e8f">HTML Comments</h4>
+<div class="outline-text-4" id="text-org2707e8f">
+<p>
+Avoid HTML markup inside code comments, it makes them harder to read in the editor.
+</p>
+
+<p>
+Let documentation tools (like Javadoc) handle formatting.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd3ef1af" class="outline-4">
+<h4 id="orgd3ef1af">Nonlocal Information</h4>
+<div class="outline-text-4" id="text-orgd3ef1af">
+<p>
+Comments should describe nearby code only, not unrelated parts of the system.
+</p>
+
+<p>
+Avoid embedding global/system details that the function can’t control.
+</p>
+</div>
+</div>
+<div id="outline-container-org6859e2c" class="outline-4">
+<h4 id="org6859e2c">Too Much Information</h4>
+<div class="outline-text-4" id="text-org6859e2c">
+<p>
+Avoid long, unnecessary historical or technical explanations.
+</p>
+
+<p>
+Keep only relevant context (e.g., “RFC 2045” reference is fine, not the full spec).
+</p>
+</div>
+</div>
+<div id="outline-container-orgd7d19c8" class="outline-4">
+<h4 id="orgd7d19c8">Inobvious Connection</h4>
+<div class="outline-text-4" id="text-orgd7d19c8">
+<p>
+Ensure the relationship between comment and code is clear.
+</p>
+
+<p>
+Don’t make readers guess what part of the code the comment refers to.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java">
+<span class="org-comment-delimiter">// </span><span class="org-comment">plus filter bytes ... but which part is &#8220;filter&#8221;?
+</span><span class="org-keyword">this</span>.pngBytes = <span class="org-keyword">new</span> <span class="org-type">byte</span>[((<span class="org-keyword">this</span>.width + 1) * <span class="org-keyword">this</span>.height * 3) + 200];
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org24f323a" class="outline-4">
+<h4 id="org24f323a">Function Headers</h4>
+<div class="outline-text-4" id="text-org24f323a">
+<p>
+Short, single purpose functions with good names don’t need header comments.
+</p>
+
+<p>
+Let the function name explain the purpose.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd626f64" class="outline-4">
+<h4 id="orgd626f64">Javadocs in Nonpublic Code</h4>
+<div class="outline-text-4" id="text-orgd626f64">
+<p>
+Javadocs are useful for public APIs, but excessive formality in internal code is just noise.
+</p>
+
+<p>
+Internal methods should be self explanatory without full doc comments.
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer>
+<div class="copyright-container">
+<div class="copyright">
+Copyright &copy; 2022-2025 Zaine Qayyum. All rights reserved unless otherwise noted.</div></div>
+<div class="generated">
+Created with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.1 (<a href="https://orgmode.org">Org</a> mode 9.7.11) on <a href="https://www.archlinux.org/">Arch</a> <a href="https://www.gnu.org">GNU</a>/<a href="https://www.kernel.org/">Linux</a>
+</div>
+</footer>
+</div>
+</body>
+</html>
