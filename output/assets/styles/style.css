@@ -176,6 +176,21 @@ footer{
     box-sizing: border-box;
 }
 
+/* Make margin notes stack instead of overlapping */
+.sidenote,
+.marginnote{
+  display: block;      /* spans -> blocks so clearing works predictably */
+  clear: right;        /* each note starts below the previous right-floated note */
+}
+
+/* Add a little spacing between consecutive notes in the margin */
+.sidenote + .sidenote,
+.sidenote + .marginnote,
+.marginnote + .sidenote,
+.marginnote + .marginnote{
+  margin-top: .4rem;
+}
+
 /* Optional: show the same footnote number in the margin */
 .footnote-sidenote::before{
   content: attr(data-fn) " ";

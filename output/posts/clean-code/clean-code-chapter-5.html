@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-08-28 Thu 17:03 -->
+<!-- 2025-08-28 Thu 17:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Clean Code: Chapter 5 Notes</title>
@@ -224,27 +224,27 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf6788d4">Chapter 5: Formatting</a>
+<li><a href="#orgdafac05">Chapter 5: Formatting</a>
 <ul>
-<li><a href="#org28e2157">Vertical Formatting</a>
+<li><a href="#org81f65b9">Vertical Formatting</a>
 <ul>
-<li><a href="#orga4fe877">Vertical Density</a></li>
-<li><a href="#orgd65a796">Vertical Distance</a></li>
-<li><a href="#orgc7e60d5">Conceptual Affinity</a></li>
-<li><a href="#org8209321">Vertical Ordering</a></li>
-<li><a href="#org1145f8a">Summary - vertical</a></li>
+<li><a href="#org33dd9b6">Vertical Density</a></li>
+<li><a href="#org2b12d6f">Vertical Distance</a></li>
+<li><a href="#org05e4e9f">Conceptual Affinity</a></li>
+<li><a href="#org0162580">Vertical Ordering</a></li>
+<li><a href="#org3cfc157">Summary - vertical</a></li>
 </ul>
 </li>
-<li><a href="#org204eeff">Horizontal Formatting</a>
+<li><a href="#org112201a">Horizontal Formatting</a>
 <ul>
-<li><a href="#orgcce3495">Horizontal Openness and Density</a></li>
-<li><a href="#orgfdedcbd">Horizontal Alignment</a></li>
-<li><a href="#org5ea9f27">Indentation</a></li>
-<li><a href="#org0a1acdf">Dummy Scopes</a></li>
+<li><a href="#orga03e540">Horizontal Openness and Density</a></li>
+<li><a href="#org985025a">Horizontal Alignment</a></li>
+<li><a href="#orgce953e4">Indentation</a></li>
+<li><a href="#orgb6c17b8">Dummy Scopes</a></li>
 </ul>
 </li>
-<li><a href="#orgec702a7">Team Rules</a></li>
-<li><a href="#org2d58312">Uncle Bob’s Formatting Rules (Example in CodeAnalyzer.java)</a></li>
+<li><a href="#org0268f50">Team Rules</a></li>
+<li><a href="#org7c257cc">Uncle Bob’s Formatting Rules (Example in CodeAnalyzer.java)</a></li>
 </ul>
 </li>
 </ul>
@@ -253,21 +253,21 @@
 <p>
 Link to <a href="clean-code-chapter-4.html">Chapter 4</a> | Link to <a href="clean-code-chapter-6.html">Chapter 6</a>
 </p>
-<div id="outline-container-orgf6788d4" class="outline-2">
-<h2 id="orgf6788d4">Chapter 5: Formatting</h2>
-<div class="outline-text-2" id="text-orgf6788d4">
+<div id="outline-container-orgdafac05" class="outline-2">
+<h2 id="orgdafac05">Chapter 5: Formatting</h2>
+<div class="outline-text-2" id="text-orgdafac05">
 </div>
-<div id="outline-container-org28e2157" class="outline-3">
-<h3 id="org28e2157">Vertical Formatting</h3>
-<div class="outline-text-3" id="text-org28e2157">
+<div id="outline-container-org81f65b9" class="outline-3">
+<h3 id="org81f65b9">Vertical Formatting</h3>
+<div class="outline-text-3" id="text-org81f65b9">
 <ul class="org-ul">
 <li>Vertical openness (blank lines) separates concepts and improves readability.</li>
 <li>Too much density makes code look like a muddle and harder to scan.</li>
 </ul>
 </div>
-<div id="outline-container-orga4fe877" class="outline-4">
-<h4 id="orga4fe877">Vertical Density</h4>
-<div class="outline-text-4" id="text-orga4fe877">
+<div id="outline-container-org33dd9b6" class="outline-4">
+<h4 id="org33dd9b6">Vertical Density</h4>
+<div class="outline-text-4" id="text-org33dd9b6">
 <ul class="org-ul">
 <li>Tightly related lines should appear vertically dense.</li>
 <li>Avoid useless comments that interrupt association.</li>
@@ -293,9 +293,9 @@ Link to <a href="clean-code-chapter-4.html">Chapter 4</a> | Link to <a href="cle
 </div>
 </div>
 </div>
-<div id="outline-container-orgd65a796" class="outline-4">
-<h4 id="orgd65a796">Vertical Distance</h4>
-<div class="outline-text-4" id="text-orgd65a796">
+<div id="outline-container-org2b12d6f" class="outline-4">
+<h4 id="org2b12d6f">Vertical Distance</h4>
+<div class="outline-text-4" id="text-org2b12d6f">
 <ul class="org-ul">
 <li>Related concepts should be kept close together to reduce scrolling and searching.</li>
 <li>Local variables → as close to use as possible, usually at top of function.</li>
@@ -325,9 +325,9 @@ Link to <a href="clean-code-chapter-4.html">Chapter 4</a> | Link to <a href="cle
 </div>
 </div>
 </div>
-<div id="outline-container-orgc7e60d5" class="outline-4">
-<h4 id="orgc7e60d5">Conceptual Affinity</h4>
-<div class="outline-text-4" id="text-orgc7e60d5">
+<div id="outline-container-org05e4e9f" class="outline-4">
+<h4 id="org05e4e9f">Conceptual Affinity</h4>
+<div class="outline-text-4" id="text-org05e4e9f">
 <ul class="org-ul">
 <li>Group functions with similar naming or shared purpose.</li>
 <li>Example (JUnit assert methods):</li>
@@ -341,9 +341,9 @@ Link to <a href="clean-code-chapter-4.html">Chapter 4</a> | Link to <a href="cle
 </div>
 </div>
 </div>
-<div id="outline-container-org8209321" class="outline-4">
-<h4 id="org8209321">Vertical Ordering</h4>
-<div class="outline-text-4" id="text-org8209321">
+<div id="outline-container-org0162580" class="outline-4">
+<h4 id="org0162580">Vertical Ordering</h4>
+<div class="outline-text-4" id="text-org0162580">
 <ul class="org-ul">
 <li>Organise code top down:
 <ul class="org-ul">
@@ -355,9 +355,9 @@ Link to <a href="clean-code-chapter-4.html">Chapter 4</a> | Link to <a href="cle
 </ul>
 </div>
 </div>
-<div id="outline-container-org1145f8a" class="outline-4">
-<h4 id="org1145f8a">Summary - vertical</h4>
-<div class="outline-text-4" id="text-org1145f8a">
+<div id="outline-container-org3cfc157" class="outline-4">
+<h4 id="org3cfc157">Summary - vertical</h4>
+<div class="outline-text-4" id="text-org3cfc157">
 <ul class="org-ul">
 <li>Use vertical openness to separate concepts.</li>
 <li>Use vertical density to group related ones.</li>
@@ -367,9 +367,9 @@ Link to <a href="clean-code-chapter-4.html">Chapter 4</a> | Link to <a href="cle
 </div>
 </div>
 </div>
-<div id="outline-container-org204eeff" class="outline-3">
-<h3 id="org204eeff">Horizontal Formatting</h3>
-<div class="outline-text-3" id="text-org204eeff">
+<div id="outline-container-org112201a" class="outline-3">
+<h3 id="org112201a">Horizontal Formatting</h3>
+<div class="outline-text-3" id="text-org112201a">
 <p>
 Keep lines short. Most professional code naturally stays within ~45 characters, with ~80 as an upper bound. Lines beyond 100–120 characters are generally careless.
 </p>
@@ -391,9 +391,9 @@ Example limit guideline:
 </pre>
 </div>
 </div>
-<div id="outline-container-orgcce3495" class="outline-4">
-<h4 id="orgcce3495">Horizontal Openness and Density</h4>
-<div class="outline-text-4" id="text-orgcce3495">
+<div id="outline-container-orga03e540" class="outline-4">
+<h4 id="orga03e540">Horizontal Openness and Density</h4>
+<div class="outline-text-4" id="text-orga03e540">
 <p>
 Use spaces to separate low-precedence operators (e.g., +, -, =) and improve readability.
 </p>
@@ -416,9 +416,9 @@ Separate arguments with spaces after commas to show distinct parameters.
 </p>
 </div>
 </div>
-<div id="outline-container-orgfdedcbd" class="outline-4">
-<h4 id="orgfdedcbd">Horizontal Alignment</h4>
-<div class="outline-text-4" id="text-orgfdedcbd">
+<div id="outline-container-org985025a" class="outline-4">
+<h4 id="org985025a">Horizontal Alignment</h4>
+<div class="outline-text-4" id="text-org985025a">
 <p>
 Avoid aligning variable declarations or assignments in columns, it draws the eye to the wrong place.
 </p>
@@ -446,9 +446,9 @@ Example (preferred unaligned):
 </div>
 </div>
 </div>
-<div id="outline-container-org5ea9f27" class="outline-4">
-<h4 id="org5ea9f27">Indentation</h4>
-<div class="outline-text-4" id="text-org5ea9f27">
+<div id="outline-container-orgce953e4" class="outline-4">
+<h4 id="orgce953e4">Indentation</h4>
+<div class="outline-text-4" id="text-orgce953e4">
 <p>
 Indent according to scope hierarchy:
 </p>
@@ -478,9 +478,9 @@ Avoid collapsing scopes onto one line, always use braces and proper indenting.
 </p>
 </div>
 </div>
-<div id="outline-container-org0a1acdf" class="outline-4">
-<h4 id="org0a1acdf">Dummy Scopes</h4>
-<div class="outline-text-4" id="text-org0a1acdf">
+<div id="outline-container-orgb6c17b8" class="outline-4">
+<h4 id="orgb6c17b8">Dummy Scopes</h4>
+<div class="outline-text-4" id="text-orgb6c17b8">
 <p>
 Avoid dummy bodies in loops (e.g., empty while or for loops).
 </p>
@@ -497,9 +497,9 @@ If unavoidable, place semicolon on its own indented line to make it visible.
 </div>
 </div>
 </div>
-<div id="outline-container-orgec702a7" class="outline-3">
-<h3 id="orgec702a7">Team Rules</h3>
-<div class="outline-text-3" id="text-orgec702a7">
+<div id="outline-container-org0268f50" class="outline-3">
+<h3 id="org0268f50">Team Rules</h3>
+<div class="outline-text-3" id="text-org0268f50">
 <p>
 Teams must agree on a single formatting style for consistency.
 </p>
@@ -513,9 +513,9 @@ Consistent formatting builds trust and reduces mental load for readers.
 </p>
 </div>
 </div>
-<div id="outline-container-org2d58312" class="outline-3">
-<h3 id="org2d58312">Uncle Bob’s Formatting Rules (Example in CodeAnalyzer.java)</h3>
-<div class="outline-text-3" id="text-org2d58312">
+<div id="outline-container-org7c257cc" class="outline-3">
+<h3 id="org7c257cc">Uncle Bob’s Formatting Rules (Example in CodeAnalyzer.java)</h3>
+<div class="outline-text-3" id="text-org7c257cc">
 <p>
 Short, clear methods with consistent spacing and indentation.
 </p>
