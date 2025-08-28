@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-08-28 Thu 17:40 -->
+<!-- 2025-08-28 Thu 17:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Clean Code: Chapter 3 Notes</title>
@@ -224,15 +224,15 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge523f07">Chapter 3: Functions</a>
+<li><a href="#org0c5cb76">Chapter 3: Functions</a>
 <ul>
-<li><a href="#org9055420">Functions should be small</a></li>
-<li><a href="#org5411560">Do One Thing &amp; One Level of Abstraction</a></li>
-<li><a href="#org37e0401">Switch Statements</a></li>
-<li><a href="#org817155b">Use Descriptive Names</a></li>
-<li><a href="#orgc63ac22">Function Arguments</a></li>
-<li><a href="#orgebd6cbb">Have No Side Effects</a></li>
-<li><a href="#org1046220">Error Handling</a></li>
+<li><a href="#org4d1b5c4">Functions should be small</a></li>
+<li><a href="#org712e52f">Do One Thing &amp; One Level of Abstraction</a></li>
+<li><a href="#orga673203">Switch Statements</a></li>
+<li><a href="#org26f4975">Use Descriptive Names</a></li>
+<li><a href="#org3c1e8f0">Function Arguments</a></li>
+<li><a href="#orgdfdb5df">Have No Side Effects</a></li>
+<li><a href="#orgb4f8a09">Error Handling</a></li>
 </ul>
 </li>
 </ul>
@@ -241,13 +241,13 @@
 <p>
 Link to <a href="clean-code-chapter-2.html">Chapter 2</a> | Link to <a href="clean-code-chapter-4.html">Chapter 4</a>
 </p>
-<div id="outline-container-orge523f07" class="outline-2">
-<h2 id="orge523f07">Chapter 3: Functions</h2>
-<div class="outline-text-2" id="text-orge523f07">
+<div id="outline-container-org0c5cb76" class="outline-2">
+<h2 id="org0c5cb76">Chapter 3: Functions</h2>
+<div class="outline-text-2" id="text-org0c5cb76">
 </div>
-<div id="outline-container-org9055420" class="outline-3">
-<h3 id="org9055420">Functions should be small</h3>
-<div class="outline-text-3" id="text-org9055420">
+<div id="outline-container-org4d1b5c4" class="outline-3">
+<h3 id="org4d1b5c4">Functions should be small</h3>
+<div class="outline-text-3" id="text-org4d1b5c4">
 <p>
 Functions should be extremely short—ideally just a few lines, so they remain easy to understand and maintain.
 </p>
@@ -269,9 +269,9 @@ Large functions hide complexity and mix abstraction levels, making errors and du
 </p>
 </div>
 </div>
-<div id="outline-container-org5411560" class="outline-3">
-<h3 id="org5411560">Do One Thing &amp; One Level of Abstraction</h3>
-<div class="outline-text-3" id="text-org5411560">
+<div id="outline-container-org712e52f" class="outline-3">
+<h3 id="org712e52f">Do One Thing &amp; One Level of Abstraction</h3>
+<div class="outline-text-3" id="text-org712e52f">
 <p>
 A function should do exactly one conceptual task, and all its statements should exist at the same abstraction level.
 </p>
@@ -293,9 +293,9 @@ Functions that “do one thing” cannot be logically split into sections such a
 </p>
 </div>
 </div>
-<div id="outline-container-org37e0401" class="outline-3">
-<h3 id="org37e0401">Switch Statements</h3>
-<div class="outline-text-3" id="text-org37e0401">
+<div id="outline-container-orga673203" class="outline-3">
+<h3 id="orga673203">Switch Statements</h3>
+<div class="outline-text-3" id="text-orga673203">
 <p>
 Switch statements naturally violate “do one thing” by handling multiple cases; they also grow in size over time.
 </p>
@@ -350,9 +350,9 @@ Example:
 </div>
 </div>
 </div>
-<div id="outline-container-org817155b" class="outline-3">
-<h3 id="org817155b">Use Descriptive Names</h3>
-<div class="outline-text-3" id="text-org817155b">
+<div id="outline-container-org26f4975" class="outline-3">
+<h3 id="org26f4975">Use Descriptive Names</h3>
+<div class="outline-text-3" id="text-org26f4975">
 <p>
 A function’s name should clearly state its purpose. Long, descriptive names beat short, cryptic ones.
 </p>
@@ -374,9 +374,9 @@ IDE refactoring tools make renaming safe, encouraging experimentation.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc63ac22" class="outline-3">
-<h3 id="orgc63ac22">Function Arguments</h3>
-<div class="outline-text-3" id="text-orgc63ac22">
+<div id="outline-container-org3c1e8f0" class="outline-3">
+<h3 id="org3c1e8f0">Function Arguments</h3>
+<div class="outline-text-3" id="text-org3c1e8f0">
 <p>
 <div class="epigraph"><blockquote>The ideal number of arguments for a function is zero (niladic). Next comes one (monadic), followed closely by two (dyadic). Three arguments (triadic) should be avoided where possible. More than three (polyadic) requires very special justification—and then shouldn’t be used anyway.</blockquote></div>
 </p>
@@ -402,9 +402,9 @@ Match function/argument names in verb–noun or keyword style (e.g., <code>write
 </p>
 </div>
 </div>
-<div id="outline-container-orgebd6cbb" class="outline-3">
-<h3 id="orgebd6cbb">Have No Side Effects</h3>
-<div class="outline-text-3" id="text-orgebd6cbb">
+<div id="outline-container-orgdfdb5df" class="outline-3">
+<h3 id="orgdfdb5df">Have No Side Effects</h3>
+<div class="outline-text-3" id="text-orgdfdb5df">
 <p>
 A function should do only what its name promises. Hidden state changes are misleading and dangerous.
 </p>
@@ -426,9 +426,9 @@ Functions that modify state and return information often cause confusion and sho
 </p>
 </div>
 </div>
-<div id="outline-container-org1046220" class="outline-3">
-<h3 id="org1046220">Error Handling</h3>
-<div class="outline-text-3" id="text-org1046220">
+<div id="outline-container-orgb4f8a09" class="outline-3">
+<h3 id="orgb4f8a09">Error Handling</h3>
+<div class="outline-text-3" id="text-orgb4f8a09">
 <p>
 Error handling is a single responsibility—separate it from normal logic to keep both paths clear.
 </p>

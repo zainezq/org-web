@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-08-28 Thu 17:40 -->
+<!-- 2025-08-28 Thu 17:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Clean Code: Chapter 4 Notes</title>
@@ -224,34 +224,34 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6a1be50">Chapter 4: Comments</a>
+<li><a href="#orgf38a65c">Chapter 4: Comments</a>
 <ul>
-<li><a href="#org38a85de">Comments Do Not Make Up for Bad Code</a></li>
-<li><a href="#org3d21f6c">Good Comments</a>
+<li><a href="#orgccbc8a0">Comments Do Not Make Up for Bad Code</a></li>
+<li><a href="#orgf7cdf31">Good Comments</a>
 <ul>
-<li><a href="#org60faf90">Legal Comments</a></li>
-<li><a href="#org4c03b28">Informative Comments</a></li>
-<li><a href="#org89d84dd">Explanation of Intent</a></li>
-<li><a href="#org147392d">Clarification</a></li>
-<li><a href="#orgcbd8f61">Warning of Consequences</a></li>
-<li><a href="#org10dc31f"><span class="todo TODO">TODO</span> Comments</a></li>
-<li><a href="#orge3c8120">Amplification</a></li>
-<li><a href="#org1c2990b">Javadocs in Public APIs</a></li>
+<li><a href="#org9362690">Legal Comments</a></li>
+<li><a href="#orgea06608">Informative Comments</a></li>
+<li><a href="#org9a8cff9">Explanation of Intent</a></li>
+<li><a href="#org756e85b">Clarification</a></li>
+<li><a href="#orge9e3aea">Warning of Consequences</a></li>
+<li><a href="#orgda7a8c2"><span class="todo TODO">TODO</span> Comments</a></li>
+<li><a href="#org7ab6062">Amplification</a></li>
+<li><a href="#org4e714d5">Javadocs in Public APIs</a></li>
 </ul>
 </li>
-<li><a href="#org1383acc">Bad Comments</a>
+<li><a href="#orgad7568e">Bad Comments</a>
 <ul>
-<li><a href="#org70b00fd">Don’t Use a Comment When You Can Use a Function or Variable</a></li>
-<li><a href="#org6dc1eb9">Position Markers</a></li>
-<li><a href="#org96c1712">Closing Brace Comments</a></li>
-<li><a href="#org08bd78d">Attributions and Bylines</a></li>
-<li><a href="#orgef8c07d">Commented Out Code</a></li>
-<li><a href="#org1f7eb78">HTML Comments</a></li>
-<li><a href="#orgda710fa">Nonlocal Information</a></li>
-<li><a href="#org758b635">Too Much Information</a></li>
-<li><a href="#org015cffe">Inobvious Connection</a></li>
-<li><a href="#orga50fdc5">Function Headers</a></li>
-<li><a href="#orgeb64351">Javadocs in Nonpublic Code</a></li>
+<li><a href="#org4e4984e">Don’t Use a Comment When You Can Use a Function or Variable</a></li>
+<li><a href="#orgaf4e48a">Position Markers</a></li>
+<li><a href="#orgb51d8f6">Closing Brace Comments</a></li>
+<li><a href="#org45f7fed">Attributions and Bylines</a></li>
+<li><a href="#orgd72549e">Commented Out Code</a></li>
+<li><a href="#orga4d406b">HTML Comments</a></li>
+<li><a href="#org191c38a">Nonlocal Information</a></li>
+<li><a href="#org66a46c7">Too Much Information</a></li>
+<li><a href="#org1de4858">Inobvious Connection</a></li>
+<li><a href="#orgec05bc1">Function Headers</a></li>
+<li><a href="#org9f353fd">Javadocs in Nonpublic Code</a></li>
 </ul>
 </li>
 </ul>
@@ -262,9 +262,9 @@
 <p>
 Link to <a href="clean-code-chapter-3.html">Chapter 3</a> | Link to <a href="clean-code-chapter-5.html">Chapter 5</a>
 </p>
-<div id="outline-container-org6a1be50" class="outline-2">
-<h2 id="org6a1be50">Chapter 4: Comments</h2>
-<div class="outline-text-2" id="text-org6a1be50">
+<div id="outline-container-orgf38a65c" class="outline-2">
+<h2 id="orgf38a65c">Chapter 4: Comments</h2>
+<div class="outline-text-2" id="text-orgf38a65c">
 <p>
 Comments are a necessary evil—they exist because code fails to express intent clearly.
 </p>
@@ -281,9 +281,9 @@ Strive to write code that explains itself; comments should be minimised.
 Truth is always in the code, not in the comments.
 </p>
 </div>
-<div id="outline-container-org38a85de" class="outline-3">
-<h3 id="org38a85de">Comments Do Not Make Up for Bad Code</h3>
-<div class="outline-text-3" id="text-org38a85de">
+<div id="outline-container-orgccbc8a0" class="outline-3">
+<h3 id="orgccbc8a0">Comments Do Not Make Up for Bad Code</h3>
+<div class="outline-text-3" id="text-orgccbc8a0">
 <p>
 Don’t use comments to excuse messy, unclear code. Clean the code instead.
 </p>
@@ -304,16 +304,16 @@ Clear, expressive code with few comments &gt; cluttered code with many comments.
 </div>
 </div>
 </div>
-<div id="outline-container-org3d21f6c" class="outline-3">
-<h3 id="org3d21f6c">Good Comments</h3>
-<div class="outline-text-3" id="text-org3d21f6c">
+<div id="outline-container-orgf7cdf31" class="outline-3">
+<h3 id="orgf7cdf31">Good Comments</h3>
+<div class="outline-text-3" id="text-orgf7cdf31">
 <p>
 Only write them when unavoidable. Such as in the following instances:
 </p>
 </div>
-<div id="outline-container-org60faf90" class="outline-4">
-<h4 id="org60faf90">Legal Comments</h4>
-<div class="outline-text-4" id="text-org60faf90">
+<div id="outline-container-org9362690" class="outline-4">
+<h4 id="org9362690">Legal Comments</h4>
+<div class="outline-text-4" id="text-org9362690">
 <p>
 Sometimes required for copyright/licensing.
 </p>
@@ -323,9 +323,9 @@ Keep them short; refer to standard licenses rather than embedding full legal tex
 </p>
 </div>
 </div>
-<div id="outline-container-org4c03b28" class="outline-4">
-<h4 id="org4c03b28">Informative Comments</h4>
-<div class="outline-text-4" id="text-org4c03b28">
+<div id="outline-container-orgea06608" class="outline-4">
+<h4 id="orgea06608">Informative Comments</h4>
+<div class="outline-text-4" id="text-orgea06608">
 <p>
 Explain return values, formats, or patterns.
 </p>
@@ -343,9 +343,9 @@ Prefer naming/structuring code to make such comments unnecessary.
 </div>
 </div>
 </div>
-<div id="outline-container-org89d84dd" class="outline-4">
-<h4 id="org89d84dd">Explanation of Intent</h4>
-<div class="outline-text-4" id="text-org89d84dd">
+<div id="outline-container-org9a8cff9" class="outline-4">
+<h4 id="org9a8cff9">Explanation of Intent</h4>
+<div class="outline-text-4" id="text-org9a8cff9">
 <p>
 Describe why a certain approach was chosen.
 </p>
@@ -371,9 +371,9 @@ Helps future maintainers understand reasoning behind code.
 </div>
 </div>
 </div>
-<div id="outline-container-org147392d" class="outline-4">
-<h4 id="org147392d">Clarification</h4>
-<div class="outline-text-4" id="text-org147392d">
+<div id="outline-container-org756e85b" class="outline-4">
+<h4 id="org756e85b">Clarification</h4>
+<div class="outline-text-4" id="text-org756e85b">
 <p>
 Translate obscure values into readable terms.
 </p>
@@ -383,9 +383,9 @@ Useful when working with unchangeable APIs/libraries, but risky if incorrect.
 </p>
 </div>
 </div>
-<div id="outline-container-orgcbd8f61" class="outline-4">
-<h4 id="orgcbd8f61">Warning of Consequences</h4>
-<div class="outline-text-4" id="text-orgcbd8f61">
+<div id="outline-container-orge9e3aea" class="outline-4">
+<h4 id="orge9e3aea">Warning of Consequences</h4>
+<div class="outline-text-4" id="text-orge9e3aea">
 <p>
 Alert others about performance, thread-safety, or side effects.
 </p>
@@ -399,9 +399,9 @@ For example, in code you can say:
 </p>
 </div>
 </div>
-<div id="outline-container-org10dc31f" class="outline-4">
-<h4 id="org10dc31f"><span class="todo TODO">TODO</span> Comments</h4>
-<div class="outline-text-4" id="text-org10dc31f">
+<div id="outline-container-orgda7a8c2" class="outline-4">
+<h4 id="orgda7a8c2"><span class="todo TODO">TODO</span> Comments</h4>
+<div class="outline-text-4" id="text-orgda7a8c2">
 <p>
 Mark incomplete work or planned improvements.
 </p>
@@ -411,9 +411,9 @@ Should be reviewed regularly; not an excuse for bad code.
 </p>
 </div>
 </div>
-<div id="outline-container-orge3c8120" class="outline-4">
-<h4 id="orge3c8120">Amplification</h4>
-<div class="outline-text-4" id="text-orge3c8120">
+<div id="outline-container-org7ab6062" class="outline-4">
+<h4 id="org7ab6062">Amplification</h4>
+<div class="outline-text-4" id="text-org7ab6062">
 <p>
 Highlight the importance of seemingly small details.
 </p>
@@ -423,9 +423,9 @@ Highlight the importance of seemingly small details.
 </p>
 </div>
 </div>
-<div id="outline-container-org1c2990b" class="outline-4">
-<h4 id="org1c2990b">Javadocs in Public APIs</h4>
-<div class="outline-text-4" id="text-org1c2990b">
+<div id="outline-container-org4e714d5" class="outline-4">
+<h4 id="org4e714d5">Javadocs in Public APIs</h4>
+<div class="outline-text-4" id="text-org4e714d5">
 <p>
 Public APIs should have clear documentation.
 </p>
@@ -436,9 +436,9 @@ Javadocs can also mislead. Keep them accurate and up-to-date.
 </div>
 </div>
 </div>
-<div id="outline-container-org1383acc" class="outline-3">
-<h3 id="org1383acc">Bad Comments</h3>
-<div class="outline-text-3" id="text-org1383acc">
+<div id="outline-container-orgad7568e" class="outline-3">
+<h3 id="orgad7568e">Bad Comments</h3>
+<div class="outline-text-3" id="text-orgad7568e">
 <ul class="org-ul">
 <li>Don't place a comment just because you feel like it.</li>
 <li>Remove redundant comments.</li>
@@ -448,9 +448,9 @@ Javadocs can also mislead. Keep them accurate and up-to-date.
 <li>Remove noise comments.</li>
 </ul>
 </div>
-<div id="outline-container-org70b00fd" class="outline-4">
-<h4 id="org70b00fd">Don’t Use a Comment When You Can Use a Function or Variable</h4>
-<div class="outline-text-4" id="text-org70b00fd">
+<div id="outline-container-org4e4984e" class="outline-4">
+<h4 id="org4e4984e">Don’t Use a Comment When You Can Use a Function or Variable</h4>
+<div class="outline-text-4" id="text-org4e4984e">
 <p>
 Replace explanatory comments with expressive variable or function names.
 </p>
@@ -460,9 +460,9 @@ Refactor code to remove comment redundancy.
 </p>
 </div>
 </div>
-<div id="outline-container-org6dc1eb9" class="outline-4">
-<h4 id="org6dc1eb9">Position Markers</h4>
-<div class="outline-text-4" id="text-org6dc1eb9">
+<div id="outline-container-orgaf4e48a" class="outline-4">
+<h4 id="orgaf4e48a">Position Markers</h4>
+<div class="outline-text-4" id="text-orgaf4e48a">
 <p>
 Avoid decorative banners like <code>// Actions ///////////////////////</code>, they add clutter.
 </p>
@@ -476,9 +476,9 @@ Overuse makes them blend into background noise.
 </p>
 </div>
 </div>
-<div id="outline-container-org96c1712" class="outline-4">
-<h4 id="org96c1712">Closing Brace Comments</h4>
-<div class="outline-text-4" id="text-org96c1712">
+<div id="outline-container-orgb51d8f6" class="outline-4">
+<h4 id="orgb51d8f6">Closing Brace Comments</h4>
+<div class="outline-text-4" id="text-orgb51d8f6">
 <p>
 Comments on closing braces (} // while) are unnecessary for small, well structured functions.
 </p>
@@ -488,9 +488,9 @@ Prefer short, clear functions over brace markers.
 </p>
 </div>
 </div>
-<div id="outline-container-org08bd78d" class="outline-4">
-<h4 id="org08bd78d">Attributions and Bylines</h4>
-<div class="outline-text-4" id="text-org08bd78d">
+<div id="outline-container-org45f7fed" class="outline-4">
+<h4 id="org45f7fed">Attributions and Bylines</h4>
+<div class="outline-text-4" id="text-org45f7fed">
 <p>
 Don’t add personal tags like <code>/* Added by Rick */</code>, use version control for authorship history.
 </p>
@@ -500,9 +500,9 @@ Such comments become outdated and irrelevant over time.
 </p>
 </div>
 </div>
-<div id="outline-container-orgef8c07d" class="outline-4">
-<h4 id="orgef8c07d">Commented Out Code</h4>
-<div class="outline-text-4" id="text-orgef8c07d">
+<div id="outline-container-orgd72549e" class="outline-4">
+<h4 id="orgd72549e">Commented Out Code</h4>
+<div class="outline-text-4" id="text-orgd72549e">
 <p>
 Never keep old code commented out; delete it and rely on version control history.
 </p>
@@ -521,9 +521,9 @@ Commented-out code adds clutter and confuses future maintainers.
 </div>
 </div>
 </div>
-<div id="outline-container-org1f7eb78" class="outline-4">
-<h4 id="org1f7eb78">HTML Comments</h4>
-<div class="outline-text-4" id="text-org1f7eb78">
+<div id="outline-container-orga4d406b" class="outline-4">
+<h4 id="orga4d406b">HTML Comments</h4>
+<div class="outline-text-4" id="text-orga4d406b">
 <p>
 Avoid HTML markup inside code comments, it makes them harder to read in the editor.
 </p>
@@ -533,9 +533,9 @@ Let documentation tools (like Javadoc) handle formatting.
 </p>
 </div>
 </div>
-<div id="outline-container-orgda710fa" class="outline-4">
-<h4 id="orgda710fa">Nonlocal Information</h4>
-<div class="outline-text-4" id="text-orgda710fa">
+<div id="outline-container-org191c38a" class="outline-4">
+<h4 id="org191c38a">Nonlocal Information</h4>
+<div class="outline-text-4" id="text-org191c38a">
 <p>
 Comments should describe nearby code only, not unrelated parts of the system.
 </p>
@@ -545,9 +545,9 @@ Avoid embedding global/system details that the function can’t control.
 </p>
 </div>
 </div>
-<div id="outline-container-org758b635" class="outline-4">
-<h4 id="org758b635">Too Much Information</h4>
-<div class="outline-text-4" id="text-org758b635">
+<div id="outline-container-org66a46c7" class="outline-4">
+<h4 id="org66a46c7">Too Much Information</h4>
+<div class="outline-text-4" id="text-org66a46c7">
 <p>
 Avoid long, unnecessary historical or technical explanations.
 </p>
@@ -557,9 +557,9 @@ Keep only relevant context (e.g., “RFC 2045” reference is fine, not the full
 </p>
 </div>
 </div>
-<div id="outline-container-org015cffe" class="outline-4">
-<h4 id="org015cffe">Inobvious Connection</h4>
-<div class="outline-text-4" id="text-org015cffe">
+<div id="outline-container-org1de4858" class="outline-4">
+<h4 id="org1de4858">Inobvious Connection</h4>
+<div class="outline-text-4" id="text-org1de4858">
 <p>
 Ensure the relationship between comment and code is clear.
 </p>
@@ -577,9 +577,9 @@ Don’t make readers guess what part of the code the comment refers to.
 </div>
 </div>
 </div>
-<div id="outline-container-orga50fdc5" class="outline-4">
-<h4 id="orga50fdc5">Function Headers</h4>
-<div class="outline-text-4" id="text-orga50fdc5">
+<div id="outline-container-orgec05bc1" class="outline-4">
+<h4 id="orgec05bc1">Function Headers</h4>
+<div class="outline-text-4" id="text-orgec05bc1">
 <p>
 Short, single purpose functions with good names don’t need header comments.
 </p>
@@ -589,9 +589,9 @@ Let the function name explain the purpose.
 </p>
 </div>
 </div>
-<div id="outline-container-orgeb64351" class="outline-4">
-<h4 id="orgeb64351">Javadocs in Nonpublic Code</h4>
-<div class="outline-text-4" id="text-orgeb64351">
+<div id="outline-container-org9f353fd" class="outline-4">
+<h4 id="org9f353fd">Javadocs in Nonpublic Code</h4>
+<div class="outline-text-4" id="text-org9f353fd">
 <p>
 Javadocs are useful for public APIs, but excessive formality in internal code is just noise.
 </p>
